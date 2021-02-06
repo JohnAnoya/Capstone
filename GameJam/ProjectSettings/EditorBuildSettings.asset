@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9184693a6b33d674c936b0fa0b51752a
+  - enabled: 1
+    path: Assets/Scenes/EscapeRoom1.unity
+    guid: 8d58d74a8ffc54e45ac2c9be3d5ec198
+  - enabled: 1
+    path: Assets/Scenes/EscapeRoom2.unity
+    guid: 55bcf36805a859848ad871ef26b8d7dc
+  - enabled: 1
+    path: Assets/Scenes/EscapeRoom3.unity
+    guid: 5b066a3dc1220b94f8f6617b4abb89ba
+  - enabled: 1
+    path: Assets/Scenes/EscapeRoom4.unity
+    guid: 806694a84c79d944eafa33f48d6b49ba
+  - enabled: 1
+    path: Assets/Scenes/EscapeRoom5.unity
+    guid: b01123c359876e14c9b1b956d33a3fa7
+  - enabled: 1
+    path: Assets/Scenes/WinningScene.unity
+    guid: 64aa0020bc42568448dfdb81912d570a
+  - enabled: 1
+    path: Assets/Scenes/LosingScene.unity
+    guid: a8bfeb26394cd1648aa5bb9c211528b2
+  m_configObjects: {}

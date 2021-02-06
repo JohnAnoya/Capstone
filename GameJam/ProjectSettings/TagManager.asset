@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Note1
+  - Note2
+  - Note3
+  - Note4
+  - Note5
+  - Potion
+  - FireplaceSwitch
+  - DoubleDoorTrigger1
+  - DoubleDoorTrigger2
+  - DoubleDoorTrigger3
+  - Key
+  - Hint1
+  - Hint2
+  - Brew
+  - PrisonSwitch
+  - BookButton
+  - 1KeyPad
+  - 2KeyPad
+  - 3KeyPad
+  - 4KeyPad
+  - 5KeyPad
+  - 6KeyPad
+  - 7KeyPad
+  - 8KeyPad
+  - 9KeyPad
+  - Enter
+  - Reset
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Text
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
