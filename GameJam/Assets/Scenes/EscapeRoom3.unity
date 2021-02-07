@@ -3584,8 +3584,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0461962, y: 1.0900903, z: 1.0558625}
-  m_Center: {x: -0.7810821, y: -0.8636282, z: 0.027931558}
+  m_Size: {x: 1.5663463, y: 1.4223588, z: 1.0558625}
+  m_Center: {x: -0.52100563, y: -0.69749355, z: 0.027931558}
 --- !u!1001 &675020635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3818,12 +3818,17 @@ PrefabInstance:
     - target: {fileID: 6322556187633357650, guid: f5e4cf5af47ee60418f92554c028a4ce,
         type: 3}
       propertyPath: m_Name
-      value: DoorGate_Wooden_Right
+      value: DoorGate_Wooden_Left
       objectReference: {fileID: 0}
     - target: {fileID: 6322556187633357650, guid: f5e4cf5af47ee60418f92554c028a4ce,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322556187633357650, guid: f5e4cf5af47ee60418f92554c028a4ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: LeftDoubleDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e4cf5af47ee60418f92554c028a4ce, type: 3}
@@ -10723,7 +10728,7 @@ Animator:
   m_GameObject: {fileID: 1685662348}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f9cfee050562512469b2fa51696e1911, type: 2}
+  m_Controller: {fileID: 9100000, guid: e1426685038d6174397f1b185c358a2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10811,7 +10816,7 @@ Animator:
   m_GameObject: {fileID: 1701865935}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e1426685038d6174397f1b185c358a2c, type: 2}
+  m_Controller: {fileID: 9100000, guid: f9cfee050562512469b2fa51696e1911, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12338,12 +12343,17 @@ PrefabInstance:
     - target: {fileID: 7750370834963051906, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6,
         type: 3}
       propertyPath: m_Name
-      value: DoorGate_Wooden_Left
+      value: DoorGate_Wooden_Right
       objectReference: {fileID: 0}
     - target: {fileID: 7750370834963051906, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750370834963051906, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: RightDoubleDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6, type: 3}

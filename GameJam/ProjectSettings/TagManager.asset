@@ -31,6 +31,9 @@ TagManager:
   - FireParticles
   - LeftDoubleDoor
   - RightDoubleDoor
+  - PrisonDoor
+  - SingleDoor
+  - AnswerScreen
   layers:
   - Default
   - TransparentFX

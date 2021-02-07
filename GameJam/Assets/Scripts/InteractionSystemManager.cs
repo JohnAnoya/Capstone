@@ -162,11 +162,10 @@ public class InteractionSystemManager : MonoBehaviour
 
                 if (Interactables.Contains("PrisonSwitch") && Input.GetMouseButtonDown(0))
                 {
-                    switchSound.time = 0.45f;
-                    switchSound.Play();
-
-
                     SingleDoorPrison.Play("SingleDoorOpen", 0, 0.0f);
+
+                    switchSound.time = 0.45f;
+                    switchSound.Play();  
                 }
             }
 
@@ -182,10 +181,10 @@ public class InteractionSystemManager : MonoBehaviour
 
                 if (Interactables.Contains("BookButton") && Input.GetMouseButtonDown(0))
                 {
+                    ExitDoor.Play("ExitDoorOpen", 0, 0.0f);
+
                     switchSound.time = 0.45f;
                     switchSound.Play();
-
-                    ExitDoor.Play("ExitDoorOpen", 0, 0.0f);
                 }
 
             }
@@ -278,22 +277,27 @@ public class InteractionSystemManager : MonoBehaviour
 
             else if (hit.transform.tag == "Brew")
             {
+                Debug.Log("Potion1 is... " + PlayerScript.CheckInventory("Potion1"));
+                Debug.Log("Potion2 is... " + PlayerScript.CheckInventory("Potion2"));
+                Debug.Log("Potion3 is... " + PlayerScript.CheckInventory("Potion3"));
+
                 if (!showingPopup)
                 {
                     showingPopup = true;
                     tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Brew Potions " + PotionCount + " /3");
                 }
-
-                else if (PlayerScript.CheckInventory("Potion1") &&
+              
+               else if (PlayerScript.CheckInventory("Potion1") &&
                    PlayerScript.CheckInventory("Potion2") &&
                    PlayerScript.CheckInventory("Potion3") &&
                    Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
                 {
+                   
                     DoubleDoorisOpen = true;
                     DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
                     DoubleDoor[1].Play("RightDoubleDoorOpen", 0, 0.0f);                   
-                    Debug.Log("Player has all potions and is trying to brew");
+                    
                 }
 
             }
@@ -464,7 +468,7 @@ public class InteractionSystemManager : MonoBehaviour
                         if (AnswerScreen.GetComponentInChildren<TMP_Text>().text == passcodescript.GetPassCode())
                         {
                             DoubleDoor[0].Play("RightDoubleDoorOpen", 0, 0.0f);
-                            DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
+                            DoubleDoor[1].Play("LeftDoubleDoorOpen", 0, 0.0f);
                         }
 
                         else
@@ -530,6 +534,8 @@ public class InteractionSystemManager : MonoBehaviour
     {
         if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
         {
+            DoubleDoorisOpen = false; //Reset DoubleDoorisOpen boolean variable
+
             if(GameObject.FindGameObjectWithTag("Player"))
             {
                 player = GameObject.FindGameObjectWithTag("Player");
@@ -544,6 +550,21 @@ public class InteractionSystemManager : MonoBehaviour
             {
                 DoubleDoor[0] = GameObject.FindGameObjectWithTag("LeftDoubleDoor").GetComponent<Animator>();
                 DoubleDoor[1] = GameObject.FindGameObjectWithTag("RightDoubleDoor").GetComponent<Animator>();
+            }
+
+            if (GameObject.FindGameObjectWithTag("PrisonDoor"))
+            {
+                SingleDoorPrison = GameObject.FindGameObjectWithTag("PrisonDoor").GetComponent<Animator>();
+            }
+
+            if (GameObject.FindGameObjectWithTag("SingleDoor"))
+            {
+                ExitDoor = GameObject.FindGameObjectWithTag("SingleDoor").GetComponent<Animator>();
+            }
+
+            if (GameObject.FindGameObjectWithTag("AnswerScreen"))
+            {
+               AnswerScreen = GameObject.FindGameObjectWithTag("AnswerScreen");
             }
 
             if (GameObject.FindGameObjectWithTag("NoteImage")) 
