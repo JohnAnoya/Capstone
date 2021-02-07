@@ -4,11 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Note1
-  - Note2
-  - Note3
-  - Note4
-  - Note5
   - Potion
   - FireplaceSwitch
   - DoubleDoorTrigger1
@@ -31,6 +26,11 @@ TagManager:
   - 9KeyPad
   - Enter
   - Reset
+  - Note
+  - NoteImage
+  - FireParticles
+  - LeftDoubleDoor
+  - RightDoubleDoor
   layers:
   - Default
   - TransparentFX

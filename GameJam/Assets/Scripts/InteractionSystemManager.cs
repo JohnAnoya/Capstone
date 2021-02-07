@@ -3,39 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class InteractionSystem : MonoBehaviour
+public class InteractionSystemManager : MonoBehaviour
 {
-    List<string> Items = new List<string>();
-    List<string> Interactables = new List<string>();
+    /* SINGLETON CLASS SETUP */
+    private static InteractionSystemManager instance_;
+    public static InteractionSystemManager Instance { get { return instance_; } }
 
-    public GameObject InteractionPopUp;
+    void Awake()
+    {
+        if (instance_ != null && instance_ != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance_ = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    /* SINGLETON CLASS SETUP */
+    GameObject player; //Reference to Player
+
+    List<string> Items = new List<string>(); //List of Items
+    List<string> Interactables = new List<string>(); //List of Interactables
+
+    public GameObject InteractionPopUp; //Interaction Notification Popup Prefab
     GameObject tempPopup;
     bool showingPopup = false;
 
-    bool firePlace = true;
+    bool firePlace = true; //Fireplace stuff
     public ParticleSystem fireplaceEmitter;
 
-    [SerializeField]
-    Image note1;
-    [SerializeField]
-    Image note2;
-    [SerializeField]
-    Image note3;
-    [SerializeField]
-    Image note4;
-    [SerializeField]
-    Image note5;
-
-    [SerializeField]
-     Image[] Notes = new Image[5];
-       
+    [SerializeField] //Note stuff
+    Image NoteImage; 
     bool showingNote = false;
-    //[SerializeField]
-    //Image hintBook;
 
-    [SerializeField] private Animator RightDoubleDoor = null;
-    [SerializeField] private Animator LeftDoubleDoor = null;
+    [SerializeField] private Animator[] DoubleDoor = new Animator[2];
     [SerializeField] private Animator SingleDoorPrison = null;
     [SerializeField] private Animator ExitDoor = null;
     bool DoubleDoorisOpen = false;
@@ -43,72 +48,37 @@ public class InteractionSystem : MonoBehaviour
     int PotionCount = 0;
 
     AudioSource switchSound;
-    GameObject AnswerScreen; 
+    GameObject AnswerScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Items.Add("Key");
-        Items.Add("Potion");
-        Interactables.Add("FireplaceSwitch");
-        Interactables.Add("PrisonSwitch");
-        Interactables.Add("Note1");
-        Interactables.Add("Note2");
-        Interactables.Add("Note3");
-        Interactables.Add("Note4");
-        Interactables.Add("Note5");
-        Interactables.Add("DoubleDoorTrigger1");
-        Interactables.Add("DoubleDoorTrigger2");
-        Interactables.Add("DoubleDoorTrigger3");
-        Interactables.Add("DoubleDoorTrigger4");
-        Interactables.Add("Brew");
-        Interactables.Add("BookButton");
+        //Assigning Items and Interactables
+        AddToItemList("Key", "Potion");
 
-        //* KEYPAD STUFF *//
-        Interactables.Add("1KeyPad");
-        Interactables.Add("2KeyPad");
-        Interactables.Add("3KeyPad");
-        Interactables.Add("4KeyPad");
-        Interactables.Add("5KeyPad");
-        Interactables.Add("6KeyPad");
-        Interactables.Add("7KeyPad");
-        Interactables.Add("8KeyPad");
-        Interactables.Add("9KeyPad");
-        Interactables.Add("Enter");
-        Interactables.Add("Reset");
+        AddToInteractableList("FireplaceSwitch", "PrisonSwitch", "Note", "Note2", "Note3", "Note4", "Note5",
+           "DoubleDoorTrigger1", "DoubleDoorTrigger2", "DoubleDoorTrigger3", "Brew", "BookButton",
+           "1KeyPad", "2KeyPad", "3KeyPad", "4KeyPad", "5KeyPad", "6KeyPad", "7KeyPad", "8KeyPad", 
+           "9KeyPad", "Enter", "Reset");
 
-        //Interactables.Add("Book_Open");   
-
-
-        if (GameObject.Find("FireplaceSwitch"))
-        {
-            switchSound = GameObject.Find("FireplaceSwitch").GetComponent<AudioSource>();
-        }
-
-        else if (GameObject.Find("PrisonSwitch"))
-        {
-            switchSound = GameObject.Find("PrisonSwitch").GetComponent<AudioSource>();
-        }
-
-        else if (GameObject.Find("AnswerScreen"))
-        {
-            Debug.Log("Test");
-            AnswerScreen = GameObject.Find("AnswerScreen");
-        }
+        SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CheckForInteractions(); 
+       if (player)
+       {
+          CheckForInteractions();
+       }
     }
 
     void CheckForInteractions()
     {
-        var PlayerScript = gameObject.GetComponent<Player>();
 
+       var PlayerScript = player.GetComponent<Player>(); 
+     
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;
+
 
         if (Physics.Raycast(ray, out hit, 1.0f))
         {
@@ -220,7 +190,7 @@ public class InteractionSystem : MonoBehaviour
 
             }
 
-            else if (hit.transform.tag == "Note1")
+            else if (hit.transform.tag == "Note")
             {
                 if (!showingPopup)
                 {
@@ -229,100 +199,14 @@ public class InteractionSystem : MonoBehaviour
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Read Note");
                 }
 
-                if (Interactables.Contains("Note1") && Input.GetMouseButtonDown(0) && !showingNote)
+                if (Interactables.Contains("Note") && Input.GetMouseButtonDown(0) && !showingNote)
                 {
-                    note1.enabled = true;
+                    NoteImage.enabled = true;
                     showingNote = true;
                 }
                 else if (showingNote && Input.GetMouseButtonDown(0))
                 {
-                    note1.enabled = false;
-                    showingNote = false;
-                }
-            }
-
-
-            else if (hit.transform.tag == "Note2")
-            {
-                if (!showingPopup)
-                {
-                    showingPopup = true;
-                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y + 0.3f, hit.transform.position.z - 0.4f), Quaternion.identity);
-                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Read Note");
-                }
-
-                if (Interactables.Contains("Note2") && Input.GetMouseButtonDown(0) && !showingNote)
-                {
-                    note2.enabled = true;
-                    showingNote = true;
-                }
-                else if (showingNote && Input.GetMouseButtonDown(0))
-                {
-                    note2.enabled = false;
-                    showingNote = false;
-                }
-            }
-
-            else if (hit.transform.tag == "Note3")
-            {
-                if (!showingPopup)
-                {
-                    showingPopup = true;
-                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y + 1.0f, hit.transform.position.z - 0.4f), Quaternion.identity);
-                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Read Note");
-                }
-
-                if (Interactables.Contains("Note3") && Input.GetMouseButtonDown(0) && !showingNote)
-                {
-                    note3.enabled = true;
-                    showingNote = true;
-                }
-                else if (showingNote && Input.GetMouseButtonDown(0))
-                {
-                    note3.enabled = false;
-                    showingNote = false;
-                }
-            }
-
-
-            else if (hit.transform.tag == "Note4")
-            {
-                if (!showingPopup)
-                {
-                    showingPopup = true;
-                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
-                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Read Note");
-                }
-
-                if (Interactables.Contains("Note4") && Input.GetMouseButtonDown(0) && !showingNote)
-                {
-                    note4.enabled = true;
-                    showingNote = true;
-                }
-                else if (showingNote && Input.GetMouseButtonDown(0))
-                {
-                    note4.enabled = false;
-                    showingNote = false;
-                }
-            }
-
-            else if (hit.transform.tag == "Note5")
-            {
-                if (!showingPopup)
-                {
-                    showingPopup = true;
-                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
-                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Read Note");
-                }
-
-                if (Interactables.Contains("Note5") && Input.GetMouseButtonDown(0) && !showingNote)
-                {
-                    note5.enabled = true;
-                    showingNote = true;
-                }
-                else if (showingNote && Input.GetMouseButtonDown(0))
-                {
-                    note5.enabled = false;
+                    NoteImage.enabled = false;
                     showingNote = false;
                 }
             }
@@ -367,8 +251,8 @@ public class InteractionSystem : MonoBehaviour
                 else if (Interactables.Contains("DoubleDoorTrigger1") && Input.GetMouseButtonDown(0) && !DoubleDoorisOpen && PlayerScript.CheckInventory("Key"))
                 {
                     DoubleDoorisOpen = true;
-                    RightDoubleDoor.Play("RightDoubleDoorOpen", 0, 0.0f);
-                    LeftDoubleDoor.Play("LeftDoubleDoorOpen", 0, 0.0f);
+                    DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
+                    DoubleDoor[1].Play("RightDoubleDoorOpen", 0, 0.0f);              
                     Destroy(tempPopup);
                     showingPopup = false;
                 }
@@ -407,8 +291,8 @@ public class InteractionSystem : MonoBehaviour
                    Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
                 {
                     DoubleDoorisOpen = true;
-                    RightDoubleDoor.Play("RightDoubleDoorOpen", 0, 0.0f);
-                    LeftDoubleDoor.Play("LeftDoubleDoorOpen", 0, 0.0f);
+                    DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
+                    DoubleDoor[1].Play("RightDoubleDoorOpen", 0, 0.0f);                   
                     Debug.Log("Player has all potions and is trying to brew");
                 }
 
@@ -579,15 +463,15 @@ public class InteractionSystem : MonoBehaviour
 
                         if (AnswerScreen.GetComponentInChildren<TMP_Text>().text == passcodescript.GetPassCode())
                         {
-                            RightDoubleDoor.Play("RightDoubleDoorOpen", 0, 0.0f);
-                            LeftDoubleDoor.Play("LeftDoubleDoorOpen", 0, 0.0f);
+                            DoubleDoor[0].Play("RightDoubleDoorOpen", 0, 0.0f);
+                            DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
                         }
 
                         else
                         {
-                            
+
                         }
-                    }         
+                    }
                 }
             }
 
@@ -608,6 +492,7 @@ public class InteractionSystem : MonoBehaviour
             }
         }
 
+
         else if (showingPopup)
         {
             showingPopup = false;
@@ -616,34 +501,55 @@ public class InteractionSystem : MonoBehaviour
 
         else if (showingNote)
         {
-            if (note1)
+            if (NoteImage)
             {
-                note1.enabled = false;
-            }
-
-            else if (note2)
-            {
-                note2.enabled = false;
-            }
-
-            else if (note3)
-            {
-                note3.enabled = false;
-            }
-
-            else if (note4)
-            {
-                note4.enabled = false;
-            }
-
-            else if (note5)
-            {
-                note5.enabled = false;
+                NoteImage.enabled = false;
             }
 
             showingNote = false;
         }
+    }
 
+    void AddToItemList(params string[] list_)
+    {
+        foreach(string item in list_)
+        {
+            Items.Add(item);
+        }
+    }
 
+    void AddToInteractableList(params string[] list_)
+    {
+        foreach (string interactable in list_)
+        {      
+            Interactables.Add(interactable);
+        }
+    }
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
+        {
+            if(GameObject.FindGameObjectWithTag("Player"))
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+
+            if(GameObject.FindGameObjectWithTag("FireplaceSwitch"))
+            {
+                fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
+            }
+
+            if(GameObject.FindGameObjectWithTag("LeftDoubleDoor") && GameObject.FindGameObjectWithTag("RightDoubleDoor"))
+            {
+                DoubleDoor[0] = GameObject.FindGameObjectWithTag("LeftDoubleDoor").GetComponent<Animator>();
+                DoubleDoor[1] = GameObject.FindGameObjectWithTag("RightDoubleDoor").GetComponent<Animator>();
+            }
+
+            if (GameObject.FindGameObjectWithTag("NoteImage")) 
+            {
+                NoteImage = GameObject.FindGameObjectWithTag("NoteImage").GetComponent<Image>();
+            }
+        }
     }
 }

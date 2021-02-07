@@ -1266,7 +1266,7 @@ PrefabInstance:
     - target: {fileID: 4883379290849355137, guid: 571f5dec7e36f1d44bd714b42ba5c2ee,
         type: 3}
       propertyPath: m_TagString
-      value: Note1
+      value: Note
       objectReference: {fileID: 0}
     - target: {fileID: 4883379290849458593, guid: 571f5dec7e36f1d44bd714b42ba5c2ee,
         type: 3}
@@ -1496,6 +1496,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322556187633357650, guid: f5e4cf5af47ee60418f92554c028a4ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: RightDoubleDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e4cf5af47ee60418f92554c028a4ce, type: 3}
@@ -4277,7 +4282,7 @@ GameObject:
   - component: {fileID: 886105862}
   m_Layer: 5
   m_Name: Note_1_Image
-  m_TagString: Untagged
+  m_TagString: NoteImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8516,7 +8521,7 @@ GameObject:
   - component: {fileID: 1564965019}
   m_Layer: 0
   m_Name: Particle System
-  m_TagString: Untagged
+  m_TagString: FireParticles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15304,6 +15309,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7750370834963051906, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: LeftDoubleDoor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ed1f58ec447ad4fb0c93a62eb4c4b6, type: 3}
 --- !u!4 &1894810924 stripped
@@ -17212,6 +17222,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
         type: 3}
+      propertyPath: test.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
+        type: 3}
+      propertyPath: Notes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
+        type: 3}
       propertyPath: fireplaceEmitter
       value: 
       objectReference: {fileID: 1564965018}
@@ -17230,6 +17250,11 @@ PrefabInstance:
       propertyPath: LeftDoubleDoor
       value: 
       objectReference: {fileID: 827214732}
+    - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7785072757115736446, guid: 780f44b757ce537469d5f4f902693e03,
         type: 3}
       propertyPath: m_audioClip

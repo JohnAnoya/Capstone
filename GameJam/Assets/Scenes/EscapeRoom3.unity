@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 148716567}
   m_Layer: 0
   m_Name: Hint
-  m_TagString: Note3
+  m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5952,7 +5952,7 @@ PrefabInstance:
     - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
         type: 3}
@@ -9495,7 +9495,7 @@ GameObject:
   - component: {fileID: 1466935720}
   m_Layer: 5
   m_Name: Note_3_Image
-  m_TagString: Untagged
+  m_TagString: NoteImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

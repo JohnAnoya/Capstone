@@ -11922,7 +11922,7 @@ GameObject:
   - component: {fileID: 544638259}
   m_Layer: 5
   m_Name: Note_4_Image
-  m_TagString: Untagged
+  m_TagString: NoteImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20681,6 +20681,11 @@ PrefabInstance:
       propertyPath: note4
       value: 
       objectReference: {fileID: 544638259}
+    - target: {fileID: 5883918022350060179, guid: 780f44b757ce537469d5f4f902693e03,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7785072757115736446, guid: 780f44b757ce537469d5f4f902693e03,
         type: 3}
       propertyPath: m_audioClip
@@ -30427,7 +30432,7 @@ PrefabInstance:
     - target: {fileID: 4883379290849355137, guid: 571f5dec7e36f1d44bd714b42ba5c2ee,
         type: 3}
       propertyPath: m_TagString
-      value: Note4
+      value: Note
       objectReference: {fileID: 0}
     - target: {fileID: 4883379290849355150, guid: 571f5dec7e36f1d44bd714b42ba5c2ee,
         type: 3}
