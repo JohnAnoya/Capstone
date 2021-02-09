@@ -33,8 +33,9 @@ public class InteractionSystemManager : MonoBehaviour
     GameObject tempPopup;
     bool showingPopup = false;
 
-    bool firePlace = true; //Fireplace stuff
+    public bool firePlace = true; //Fireplace stuff
     public ParticleSystem fireplaceEmitter;
+    public AudioSource firePlaceSounds;
 
     [SerializeField] //Note stuff
     Image NoteImage; 
@@ -47,8 +48,11 @@ public class InteractionSystemManager : MonoBehaviour
 
     int PotionCount = 0;
 
-    AudioSource switchSound;
+   // AudioSource switchSound;
     GameObject AnswerScreen;
+
+    // Audio Clips \\
+    [SerializeField] private AudioClip switchSnd;
 
     void Start()
     {
@@ -127,12 +131,13 @@ public class InteractionSystemManager : MonoBehaviour
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn on Fireplace"); //Update text
                         firePlace = false;
                         fireplaceEmitter.Stop();
-
+                        firePlaceSounds.Stop();
                         Destroy(tempPopup);
                         showingPopup = false;
 
-                        switchSound.time = 0.45f;
-                        switchSound.Play();
+                        //switchSound.time = 0.45f;
+                        // switchSound.Play();
+                        AudioManager.instance.alterPitchEffect(switchSnd);
                     }
 
                     else
@@ -140,12 +145,14 @@ public class InteractionSystemManager : MonoBehaviour
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn off Fireplace"); //Update text
                         firePlace = true;
                         fireplaceEmitter.Play();
-
+                        firePlaceSounds.Play();
                         Destroy(tempPopup);
                         showingPopup = false;
 
-                        switchSound.time = 0.45f;
-                        switchSound.Play();
+                        //switchSound.time = 0.45f;
+                        //switchSound.Play();
+                        AudioManager.instance.alterPitchEffect(switchSnd);
+
                     }
 
                 }
@@ -164,8 +171,10 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     SingleDoorPrison.Play("SingleDoorOpen", 0, 0.0f);
 
-                    switchSound.time = 0.45f;
-                    switchSound.Play();  
+                    //switchSound.time = 0.45f;
+                    //switchSound.Play();  
+                    AudioManager.instance.alterPitchEffect(switchSnd);
+
                 }
             }
 
@@ -183,8 +192,10 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     ExitDoor.Play("ExitDoorOpen", 0, 0.0f);
 
-                    switchSound.time = 0.45f;
-                    switchSound.Play();
+                    //switchSound.time = 0.45f;
+                    //switchSound.Play();
+                    AudioManager.instance.alterPitchEffect(switchSnd);
+
                 }
 
             }
@@ -544,6 +555,7 @@ public class InteractionSystemManager : MonoBehaviour
             if(GameObject.FindGameObjectWithTag("FireplaceSwitch"))
             {
                 fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
+                firePlaceSounds = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<AudioSource>();
             }
 
             if(GameObject.FindGameObjectWithTag("LeftDoubleDoor") && GameObject.FindGameObjectWithTag("RightDoubleDoor"))

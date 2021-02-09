@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
-
     }
 
     // Update is called once per frame

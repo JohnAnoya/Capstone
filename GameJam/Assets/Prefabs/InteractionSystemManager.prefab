@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3137653844700899765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3137653844700899771}
+  - component: {fileID: 3137653844700899770}
+  m_Layer: 0
+  m_Name: InteractionSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3137653844700899771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137653844700899765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.781574, y: 4.330696, z: 26.084557}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3137653844700899770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137653844700899765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a0448decc622e42a5878ac24869618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractionPopUp: {fileID: 701447873355874855, guid: 74b62af4b4e9ec94f8f3d0aa79e6c5a3,
+    type: 3}
+  firePlace: 1
+  fireplaceEmitter: {fileID: 0}
+  NoteImage: {fileID: 0}
+  DoubleDoor:
+  - {fileID: 0}
+  - {fileID: 0}
+  SingleDoorPrison: {fileID: 0}
+  ExitDoor: {fileID: 0}
+  switchSnd: {fileID: 8300000, guid: 3a70e3acc90251446a16fdc6feb5f7f1, type: 3}
