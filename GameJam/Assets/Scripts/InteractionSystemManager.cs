@@ -24,6 +24,7 @@ public class InteractionSystemManager : MonoBehaviour
         }
     }
     /* SINGLETON CLASS SETUP */
+
     GameObject player; //Reference to Player
 
     List<string> Items = new List<string>(); //List of Items
