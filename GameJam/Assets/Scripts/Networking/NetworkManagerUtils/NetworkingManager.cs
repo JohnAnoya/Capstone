@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 public class NetworkingManager : MonoBehaviour
 {

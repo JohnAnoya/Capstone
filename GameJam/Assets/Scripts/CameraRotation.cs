@@ -12,14 +12,14 @@ public class CameraRotation : MonoBehaviourPun
 
      void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = transform.parent.gameObject.transform;
     }
 
     // Update is called once per frame

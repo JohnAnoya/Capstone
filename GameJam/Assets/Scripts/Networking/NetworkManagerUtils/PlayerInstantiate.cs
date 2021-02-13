@@ -8,6 +8,9 @@ public class PlayerInstantiate : MonoBehaviour
     [SerializeField]
     private GameObject player_;
 
+    [SerializeField]
+    private Camera camera_; 
+
     private void Awake()
     {
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
@@ -28,9 +31,12 @@ public class PlayerInstantiate : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Debug.Log("CREATING SERVER SIDE PLAYER");
+        Debug.LogError("MAKING NEW CHARACTER GUISS");
         Vector2 offset = Random.insideUnitCircle * 3.0f;
         Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
         var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
-        GameObject.FindObjectOfType<Camera>().enabled = true;
+        var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
+        newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
+        newCamera.transform.parent = plr.transform;     
     }
 }
