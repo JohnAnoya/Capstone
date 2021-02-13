@@ -15,8 +15,8 @@ public class RoomListings : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        transform.parent.GetComponent<CreateRoomMenu>().HideCreateRoomPanel();
-        transform.parent.GetComponent<CreateRoomMenu>().ShowCurrentRoomPanel();
+        GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().HideCreateRoomPanel();
+        GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().ShowCurrentRoomPanel();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
