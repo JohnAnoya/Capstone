@@ -13,7 +13,6 @@ public class PlayerListings : MonoBehaviourPunCallbacks
 
     private List<PlayerListingDetails> Listings_ = new List<PlayerListingDetails>();
 
-
     public override void OnEnable()
     {
         base.OnEnable(); 
