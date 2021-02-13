@@ -85,8 +85,7 @@ public class MyPlayer : MonoBehaviourPun
         {
 
             Transform SpawnPoint = GameObject.Find("Spawn").transform;
-            Vector2 offset = Random.insideUnitCircle * 3.0f;
-            Vector3 newposition = new Vector3(SpawnPoint.position.x + offset.x, SpawnPoint.position.y, SpawnPoint.position.z);
+            Vector3 newposition = new Vector3(SpawnPoint.position.x + Random.Range(0.1f, 0.9f), SpawnPoint.position.y, SpawnPoint.position.z + Random.Range(0.1f, 0.3f));
             
             transform.position = new Vector3(newposition.x, newposition.y, newposition.z);
         }
