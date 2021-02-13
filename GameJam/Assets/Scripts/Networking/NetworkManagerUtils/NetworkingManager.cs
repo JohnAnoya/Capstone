@@ -61,6 +61,11 @@ public class NetworkingManager : MonoBehaviour
         return null; 
     }
 
+    public static void DeleteObject(GameObject object_)
+    {
+        PhotonNetwork.Destroy(object_);
+    } 
+
     public static void PopulatePrefabsonNetwork()
     {
 #if UNITY_EDITOR

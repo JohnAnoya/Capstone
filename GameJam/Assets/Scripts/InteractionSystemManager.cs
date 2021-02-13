@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class InteractionSystemManager : MonoBehaviour
 {
@@ -280,10 +281,18 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Items.Contains("Potion") && Input.GetMouseButtonDown(0) && PotionCount < 4)
                 {
-                    Destroy(hit.transform.parent.gameObject);
-                    PotionCount += 1;
-                    PlayerScript.AddToInventory("Potion" + PotionCount.ToString());
-                    Debug.Log("Potion Count " + PotionCount);
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
+                    }
+
+                    else
+                    {
+                        Destroy(hit.transform.parent.gameObject);
+                        PotionCount += 1;
+                        PlayerScript.AddToInventory("Potion" + PotionCount.ToString());
+                        Debug.Log("Potion Count " + PotionCount);
+                    }
                 }
             }
 
