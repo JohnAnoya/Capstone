@@ -14,7 +14,7 @@ public class PlayerInstantiate : MonoBehaviour
         {
             Debug.Log("Creating local player");
             Instantiate(player_, transform.position, Quaternion.identity);
-            GameObject.FindObjectOfType<Camera>().enabled = true;
+            //GameObject.FindObjectOfType<Camera>().enabled = true;
         }
 
         else
@@ -24,7 +24,7 @@ public class PlayerInstantiate : MonoBehaviour
             Vector2 offset = Random.insideUnitCircle * 3.0f;
             Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
             NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
-            GameObject.FindObjectOfType<Camera>().enabled = true;
+            //GameObject.FindObjectOfType<Camera>().enabled = true;
         }
     }
 }
