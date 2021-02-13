@@ -13,6 +13,12 @@ public class RoomListings : MonoBehaviourPunCallbacks
 
     private List<RoomListingDetails> Listings_ = new List<RoomListingDetails>();
 
+    public override void OnJoinedRoom()
+    {
+        transform.parent.GetComponent<CreateRoomMenu>().HideCreateRoomPanel();
+        transform.parent.GetComponent<CreateRoomMenu>().ShowCurrentRoomPanel();
+    }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         foreach (RoomInfo info in roomList)

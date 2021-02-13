@@ -38,22 +38,22 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
         Debug.LogError("Failed to create a room! ERROR MESSAGE: " + message);    
     }
 
-    private void ShowCreateRoomPanel()
+    public void ShowCreateRoomPanel()
     {
         GameObject.Find("CreateRoomPanel").SetActive(true);
     }
 
-    private void HideCreateRoomPanel()
+    public void HideCreateRoomPanel()
     {
         GameObject.Find("CreateRoomPanel").SetActive(false);
     }
 
-    private void ShowCurrentRoomPanel()
+    public void ShowCurrentRoomPanel()
     {
         GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(true);
     }
 
-    private void HideCurrentRoomPanel()
+    public void HideCurrentRoomPanel()
     {
         GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(false);
     }
