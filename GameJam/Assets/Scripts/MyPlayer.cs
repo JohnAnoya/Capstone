@@ -25,7 +25,8 @@ public class MyPlayer : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (base.photonView.IsMine)
+        PhotonView pv = PhotonView.Get(this);
+        if (pv.IsMine)
         {
             float XAxis = Input.GetAxis("Horizontal");
             float ZAxis = Input.GetAxis("Vertical");
