@@ -6,7 +6,6 @@ using Photon.Realtime;
 
 public class TestConnect : MonoBehaviourPunCallbacks
 {
-
     private void Start()
     {
         Debug.Log("Connecting to Server...");

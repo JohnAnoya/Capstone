@@ -5,7 +5,7 @@ using UnityEngine;
 public class Settings : MonoBehaviour
 {
     [SerializeField]
-    private string DefaultNickName = "Ali";
+    private string DefaultNickName = "User";
 
     public string NewNickName()
     {

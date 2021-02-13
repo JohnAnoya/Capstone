@@ -10993,9 +10993,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2001831904}
-  - component: {fileID: 2001831905}
   - component: {fileID: 2001831906}
   - component: {fileID: 2001831907}
+  - component: {fileID: 2001831908}
   m_Layer: 0
   m_Name: NetworkingManager
   m_TagString: Untagged
@@ -11018,19 +11018,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2001831905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001831903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d310b9065fdeb42b94eba8290753f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings_: {fileID: 160444317}
 --- !u!114 &2001831906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11056,6 +11043,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultNickName: Ali
+--- !u!114 &2001831908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001831903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1992dd2eedb4379409b0d94bb033eedf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings_: {fileID: 160444317}
+  networkPrefrabs: []
 --- !u!1 &2015278431
 GameObject:
   m_ObjectHideFlags: 0

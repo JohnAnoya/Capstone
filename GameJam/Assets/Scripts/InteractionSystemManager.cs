@@ -70,7 +70,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     void Update()
     {
-       if (player)
+       if (player && Camera.main != null)
        {
           CheckForInteractions();
        }
@@ -262,8 +262,8 @@ public class InteractionSystemManager : MonoBehaviour
                 else if (Interactables.Contains("DoubleDoorTrigger1") && Input.GetMouseButtonDown(0) && !DoubleDoorisOpen && PlayerScript.CheckInventory("Key"))
                 {
                     DoubleDoorisOpen = true;
-                    DoubleDoor[0].Play("LeftDoubleDoorOpen", 0, 0.0f);
-                    DoubleDoor[1].Play("RightDoubleDoorOpen", 0, 0.0f);              
+                    DoubleDoor[0].SetBool("DoorOpen", true);
+                    DoubleDoor[1].SetBool("DoorOpen", true);              
                     Destroy(tempPopup);
                     showingPopup = false;
                 }

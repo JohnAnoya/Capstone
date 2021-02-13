@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using TMPro;
 using UnityEngine.UI;
 
-public class MyPlayer : MonoBehaviour
+public class MyPlayer : MonoBehaviourPun
 {
     List<string> Inventory = new List<string>();
     
@@ -24,16 +25,17 @@ public class MyPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float XAxis = Input.GetAxis("Horizontal");
-        float ZAxis = Input.GetAxis("Vertical");
+        if (base.photonView.IsMine)
+        {
+            float XAxis = Input.GetAxis("Horizontal");
+            float ZAxis = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * XAxis + transform.forward * ZAxis;
-        characterController.Move(move * Time.deltaTime * WalkSpeed);
-  
-       
+            Vector3 move = transform.right * XAxis + transform.forward * ZAxis;
+            characterController.Move(move * Time.deltaTime * WalkSpeed);
 
-        playerVel.y += gravity * Time.deltaTime;
-        characterController.Move(playerVel * Time.deltaTime);
+            playerVel.y += gravity * Time.deltaTime;
+            characterController.Move(playerVel * Time.deltaTime);
+        }
     }
 
    public void AddToInventory(string item_)
