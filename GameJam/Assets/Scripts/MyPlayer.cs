@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class MyPlayer : MonoBehaviour
 {
     List<string> Inventory = new List<string>();
     

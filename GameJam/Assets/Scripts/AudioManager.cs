@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance = null;
 
-    public Player playerInteraction;
+    public MyPlayer playerInteraction;
 
     // will be used to alter the pitch of audio effects for variation of sound.
     public float lowPitch = 0.95f;

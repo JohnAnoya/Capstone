@@ -79,7 +79,7 @@ public class InteractionSystemManager : MonoBehaviour
     void CheckForInteractions()
     {
 
-       var PlayerScript = player.GetComponent<Player>(); 
+       var PlayerScript = player.GetComponent<MyPlayer>(); 
      
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;

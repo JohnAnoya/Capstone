@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Realtime;
+using Photon.Pun;
 
 public class RoomListingDetails : MonoBehaviour
 {
@@ -15,5 +16,10 @@ public class RoomListingDetails : MonoBehaviour
     {
         roomInfo_ = info_;
         roomListingDetails_.text = info_.Name;
+    }
+
+    public void JoinRoom()
+    {
+        PhotonNetwork.JoinRoom(roomInfo_.Name);
     }
 }
