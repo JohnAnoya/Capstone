@@ -18,6 +18,7 @@ public class RoomListings : MonoBehaviourPunCallbacks
         GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().HideCreateRoomPanel();
         GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().ShowCurrentRoomPanel();
         listingsContent_.DestroyChildren();
+        Listings_.Clear(); 
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -37,11 +38,16 @@ public class RoomListings : MonoBehaviourPunCallbacks
 
             else //Otherwise if the room is added to the list, instantiate the listing prefab! 
             {
-                RoomListingDetails Listing = Instantiate(roomListing_, listingsContent_);
-                if (Listing != null)
+                int index = Listings_.FindIndex(x => x.roomInfo_.Name == info.Name);
+
+                if (index == -1)
                 {
-                    Listing.SetRoomInformation(info);
-                    Listings_.Add(Listing);
+                    RoomListingDetails Listing = Instantiate(roomListing_, listingsContent_);
+                    if (Listing != null)
+                    {
+                        Listing.SetRoomInformation(info);
+                        Listings_.Add(Listing);
+                    }
                 }
             }
         }
