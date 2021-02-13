@@ -25,7 +25,7 @@ public class CameraRotation : MonoBehaviourPun
     // Update is called once per frame
     void LateUpdate()
     {
-        if (!PhotonNetwork.IsConnected && base.photonView.IsMine)
+        if (PhotonNetwork.IsConnected && base.photonView.IsMine)
         {
             float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
