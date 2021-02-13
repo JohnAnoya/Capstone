@@ -8528,6 +8528,7 @@ GameObject:
   - component: {fileID: 1200084019}
   - component: {fileID: 1200084018}
   - component: {fileID: 1200084017}
+  - component: {fileID: 1200084020}
   m_Layer: 5
   m_Name: Leave
   m_TagString: Untagged
@@ -8598,8 +8599,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1941956577}
-        m_MethodName: CreateNewRoom
+      - m_Target: {fileID: 1200084020}
+        m_MethodName: LeaveCurrentRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8646,6 +8647,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200084015}
   m_CullTransparentMesh: 0
+--- !u!114 &1200084020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200084015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948be0c03855e5948853a6f92cda9ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1231429296
 GameObject:
   m_ObjectHideFlags: 0

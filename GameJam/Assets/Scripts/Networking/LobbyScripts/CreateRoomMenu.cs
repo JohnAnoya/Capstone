@@ -40,12 +40,12 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 
     public void ShowCreateRoomPanel()
     {
-        GameObject.Find("CreateRoomPanel").SetActive(true);
+        GameObject.Find("RoomPanels").transform.Find("CreateRoomPanel").gameObject.SetActive(true);
     }
 
     public void HideCreateRoomPanel()
     {
-        GameObject.Find("CreateRoomPanel").SetActive(false);
+        GameObject.Find("RoomPanels").transform.Find("CreateRoomPanel").gameObject.SetActive(false);
     }
 
     public void ShowCurrentRoomPanel()

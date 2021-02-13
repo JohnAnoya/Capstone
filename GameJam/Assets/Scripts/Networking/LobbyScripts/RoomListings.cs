@@ -17,6 +17,7 @@ public class RoomListings : MonoBehaviourPunCallbacks
     {
         GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().HideCreateRoomPanel();
         GameObject.Find("RoomPanels").GetComponent<CreateRoomMenu>().ShowCurrentRoomPanel();
+        listingsContent_.DestroyChildren();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
