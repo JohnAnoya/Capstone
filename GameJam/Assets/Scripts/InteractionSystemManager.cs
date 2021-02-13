@@ -545,44 +545,52 @@ public class InteractionSystemManager : MonoBehaviour
     {
         if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
         {
-            DoubleDoorisOpen = false; //Reset DoubleDoorisOpen boolean variable
+            StartCoroutine(SetInteractables());
+        }
+    }
 
-            if(GameObject.FindGameObjectWithTag("Player"))
-            {
-                player = GameObject.FindGameObjectWithTag("Player");
-            }
 
-            if(GameObject.FindGameObjectWithTag("FireplaceSwitch"))
-            {
-                fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
-                firePlaceSounds = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<AudioSource>();
-            }
+    IEnumerator SetInteractables()
+    {
+        yield return new WaitForSeconds(1.0f);
 
-            if(GameObject.FindGameObjectWithTag("LeftDoubleDoor") && GameObject.FindGameObjectWithTag("RightDoubleDoor"))
-            {
-                DoubleDoor[0] = GameObject.FindGameObjectWithTag("LeftDoubleDoor").GetComponent<Animator>();
-                DoubleDoor[1] = GameObject.FindGameObjectWithTag("RightDoubleDoor").GetComponent<Animator>();
-            }
+        DoubleDoorisOpen = false; //Reset DoubleDoorisOpen boolean variable
 
-            if (GameObject.FindGameObjectWithTag("PrisonDoor"))
-            {
-                SingleDoorPrison = GameObject.FindGameObjectWithTag("PrisonDoor").GetComponent<Animator>();
-            }
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 
-            if (GameObject.FindGameObjectWithTag("SingleDoor"))
-            {
-                ExitDoor = GameObject.FindGameObjectWithTag("SingleDoor").GetComponent<Animator>();
-            }
+        if (GameObject.FindGameObjectWithTag("FireplaceSwitch"))
+        {
+            fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
+            firePlaceSounds = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<AudioSource>();
+        }
 
-            if (GameObject.FindGameObjectWithTag("AnswerScreen"))
-            {
-               AnswerScreen = GameObject.FindGameObjectWithTag("AnswerScreen");
-            }
+        if (GameObject.FindGameObjectWithTag("LeftDoubleDoor") && GameObject.FindGameObjectWithTag("RightDoubleDoor"))
+        {
+            DoubleDoor[0] = GameObject.FindGameObjectWithTag("LeftDoubleDoor").GetComponent<Animator>();
+            DoubleDoor[1] = GameObject.FindGameObjectWithTag("RightDoubleDoor").GetComponent<Animator>();
+        }
 
-            if (GameObject.FindGameObjectWithTag("NoteImage")) 
-            {
-                NoteImage = GameObject.FindGameObjectWithTag("NoteImage").GetComponent<Image>();
-            }
+        if (GameObject.FindGameObjectWithTag("PrisonDoor"))
+        {
+            SingleDoorPrison = GameObject.FindGameObjectWithTag("PrisonDoor").GetComponent<Animator>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("SingleDoor"))
+        {
+            ExitDoor = GameObject.FindGameObjectWithTag("SingleDoor").GetComponent<Animator>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("AnswerScreen"))
+        {
+            AnswerScreen = GameObject.FindGameObjectWithTag("AnswerScreen");
+        }
+
+        if (GameObject.FindGameObjectWithTag("NoteImage"))
+        {
+            NoteImage = GameObject.FindGameObjectWithTag("NoteImage").GetComponent<Image>();
         }
     }
 }

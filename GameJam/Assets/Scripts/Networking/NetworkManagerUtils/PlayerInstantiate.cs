@@ -26,7 +26,7 @@ public class PlayerInstantiate : MonoBehaviour
 
     private IEnumerator InstantiateObjectDelayed()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
         Debug.Log("CREATING SERVER SIDE PLAYER");
         Vector2 offset = Random.insideUnitCircle * 3.0f;
         Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
