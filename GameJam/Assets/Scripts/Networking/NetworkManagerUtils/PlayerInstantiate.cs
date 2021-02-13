@@ -12,11 +12,7 @@ public class PlayerInstantiate : MonoBehaviour
     {
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            Debug.Log("CREATING SERVER SIDE PLAYER");
-            Vector2 offset = Random.insideUnitCircle * 3.0f;
-            Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
-            var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);      
-            GameObject.FindObjectOfType<Camera>().enabled = true;
+            StartCoroutine(InstantiateObjectDelayed());
         }
 
         else 
@@ -25,5 +21,16 @@ public class PlayerInstantiate : MonoBehaviour
             Instantiate(player_, transform.position, Quaternion.identity);
             GameObject.FindObjectOfType<Camera>().enabled = true;
         }
+    }
+
+
+    private IEnumerator InstantiateObjectDelayed()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Debug.Log("CREATING SERVER SIDE PLAYER");
+        Vector2 offset = Random.insideUnitCircle * 3.0f;
+        Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
+        var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
+        GameObject.FindObjectOfType<Camera>().enabled = true;
     }
 }
