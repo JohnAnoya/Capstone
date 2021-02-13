@@ -29,10 +29,32 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("Room was successfully created!");
+        HideCreateRoomPanel();
+        ShowCurrentRoomPanel();             
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.LogError("Failed to create a room! ERROR MESSAGE: " + message);    
+    }
+
+    private void ShowCreateRoomPanel()
+    {
+        GameObject.Find("CreateRoomPanel").SetActive(true);
+    }
+
+    private void HideCreateRoomPanel()
+    {
+        GameObject.Find("CreateRoomPanel").SetActive(false);
+    }
+
+    private void ShowCurrentRoomPanel()
+    {
+        GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(true);
+    }
+
+    private void HideCurrentRoomPanel()
+    {
+        GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(false);
     }
 }

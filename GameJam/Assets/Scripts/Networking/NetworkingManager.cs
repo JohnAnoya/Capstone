@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class NetworkingManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class NetworkingManager : MonoBehaviour
         }
     }
     /* SINGLETON CLASS SETUP */
+
     [SerializeField]
     private Settings settings_; 
     public Settings Settings { get { return Instance.settings_; } }
