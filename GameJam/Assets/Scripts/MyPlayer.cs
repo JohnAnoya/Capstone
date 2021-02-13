@@ -21,8 +21,6 @@ public class MyPlayer : MonoBehaviourPun
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
-
-        SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes 
     }
 
     // Update is called once per frame
@@ -75,19 +73,6 @@ public class MyPlayer : MonoBehaviourPun
         else
         {
             return false;
-        }
-    }
-
-
-    private void ChangedActiveScene(Scene current, Scene next)
-    {
-        if(next.name.Contains("Escape"))
-        {
-
-            Transform SpawnPoint = GameObject.Find("Spawn").transform;
-            Vector3 newposition = new Vector3(SpawnPoint.position.x + Random.Range(0.1f, 0.9f), SpawnPoint.position.y, SpawnPoint.position.z + Random.Range(0.1f, 0.3f));
-            
-            transform.position = new Vector3(newposition.x, newposition.y, newposition.z);
         }
     }
 }
