@@ -25,7 +25,7 @@ public class MyPlayer : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (base.photonView.IsMine)
+        if (!PhotonNetwork.IsConnected && base.photonView.IsMine)
         {
             float XAxis = Input.GetAxis("Horizontal");
             float ZAxis = Input.GetAxis("Vertical");
@@ -35,14 +35,15 @@ public class MyPlayer : MonoBehaviourPun
 
             playerVel.y += gravity * Time.deltaTime;
             characterController.Move(playerVel * Time.deltaTime);
+          
         }
 
-        else if (!base.photonView.IsMine)
+        else if (!PhotonNetwork.IsConnected && !base.photonView.IsMine)
         {
             Destroy(characterController);
         }
 
-        else
+        else if (PhotonNetwork.IsConnected)
         {
             float XAxis = Input.GetAxis("Horizontal");
             float ZAxis = Input.GetAxis("Vertical");
