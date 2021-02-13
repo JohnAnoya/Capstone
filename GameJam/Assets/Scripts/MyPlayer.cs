@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MyPlayer : MonoBehaviourPun
 {
@@ -20,6 +21,8 @@ public class MyPlayer : MonoBehaviourPun
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
+
+        SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes 
     }
 
     // Update is called once per frame
@@ -74,4 +77,19 @@ public class MyPlayer : MonoBehaviourPun
             return false;
         }
     }
+
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        if(next.name.Contains("Escape"))
+        {
+
+            Transform SpawnPoint = GameObject.Find("Spawn").transform;
+            Vector2 offset = Random.insideUnitCircle * 3.0f;
+            Vector3 newposition = new Vector3(SpawnPoint.position.x + offset.x, SpawnPoint.position.y, SpawnPoint.position.z);
+            
+            transform.position = new Vector3(newposition.x, newposition.y, newposition.z);
+        }
+    }
 }
+
