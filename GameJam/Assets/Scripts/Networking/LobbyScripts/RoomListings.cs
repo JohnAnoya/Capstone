@@ -11,14 +11,31 @@ public class RoomListings : MonoBehaviourPunCallbacks
     [SerializeField]
     private RoomListingDetails roomListing_;
 
+    private List<RoomListingDetails> Listings_ = new List<RoomListingDetails>();
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         foreach (RoomInfo info in roomList)
-        {   
-            RoomListingDetails Listing = Instantiate(roomListing_, listingsContent_);
-            if (Listing != null)
+        {
+            if (info.RemovedFromList) //If Room is removed from the list
             {
-                Listing.SetRoomInformation(info);
+                int index = Listings_.FindIndex(x => x.roomInfo_.Name == info.Name);
+                if(index != -1)
+                {
+                    Destroy(Listings_[index].gameObject);
+                    Listings_.RemoveAt(index);
+                }
+            }
+
+
+            else //Otherwise if the room is added to the list, instantiate the listing prefab! 
+            {
+                RoomListingDetails Listing = Instantiate(roomListing_, listingsContent_);
+                if (Listing != null)
+                {
+                    Listing.SetRoomInformation(info);
+                    Listings_.Add(Listing);
+                }
             }
         }
     }
