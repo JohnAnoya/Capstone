@@ -33,10 +33,20 @@ public class PlayerListings : MonoBehaviourPunCallbacks
 
     private void GetAllCurrentRoomPlayers()
     {
+        if (!PhotonNetwork.IsConnected)
+        {
+            return; 
+        }
+
+        if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
+        {
+            return;
+        }
+
         foreach (KeyValuePair<int, Player> playerInfo_ in PhotonNetwork.CurrentRoom.Players)
         {
-            AddPlayerListing(playerInfo_.Value); 
-        } 
+            AddPlayerListing(playerInfo_.Value);
+        }
     }
 
     private void AddPlayerListing(Player player_)
@@ -71,5 +81,10 @@ public class PlayerListings : MonoBehaviourPunCallbacks
             Destroy(Listings_[index].gameObject);
             Listings_.RemoveAt(index);
         }
+    }
+
+    public void StartMultiplayerGame ()
+    {
+        PhotonNetwork.LoadLevel("EscapeRoom1");
     }
 }
