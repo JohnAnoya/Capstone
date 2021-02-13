@@ -25,7 +25,7 @@ public class CameraRotation : MonoBehaviourPun
     // Update is called once per frame
     void LateUpdate()
     {
-        if (PhotonNetwork.IsConnected && base.photonView.IsMine)
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && base.photonView.IsMine)
         {
             float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
@@ -38,7 +38,7 @@ public class CameraRotation : MonoBehaviourPun
             transform.localRotation = Quaternion.Euler(XRotate, 0f, 0f);
         }
 
-        else
+        else 
         {
             float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
