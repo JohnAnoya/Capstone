@@ -41,7 +41,7 @@ public class MyPlayer : MonoBehaviourPun
         else if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !base.photonView.IsMine)
         {
             Destroy(characterController);
-            Destroy(camera);
+            Destroy(camera.transform.parent.GetComponent<CameraRotation>());
         }
 
         else
