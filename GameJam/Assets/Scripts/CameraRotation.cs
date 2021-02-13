@@ -27,6 +27,7 @@ public class CameraRotation : MonoBehaviourPun
     {
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && base.photonView.IsMine)
         {
+            Debug.Log("Is in Server!!!");
             float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
@@ -40,6 +41,7 @@ public class CameraRotation : MonoBehaviourPun
 
         else 
         {
+            Debug.Log("Is NOT in Server!!!");
             float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
