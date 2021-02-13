@@ -12,15 +12,18 @@ public class PlayerInstantiate : MonoBehaviour
     {
         if (!PhotonNetwork.IsConnected)
         {
-            Vector2 offset = Random.insideUnitCircle * 3.0f;
-            Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
-            NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
+            Debug.Log("Creating local player");
+            Instantiate(player_, transform.position, Quaternion.identity);
             GameObject.FindObjectOfType<Camera>().enabled = true;
         }
 
         else
         {
-            Instantiate(player_, transform.position, Quaternion.identity);
+            Debug.Log("PLAYER IS ON THE NETWORK AND JOINED ROOM 1");
+            Debug.Log(PhotonNetwork.PlayerList.Length);
+            Vector2 offset = Random.insideUnitCircle * 3.0f;
+            Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
+            NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
             GameObject.FindObjectOfType<Camera>().enabled = true;
         }
     }
