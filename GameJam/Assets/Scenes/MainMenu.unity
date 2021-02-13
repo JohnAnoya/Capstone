@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2718925a71a4241b2a52c06eab9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultNickName: Ali
+  DefaultNickName: User
 --- !u!4 &160444318
 Transform:
   m_ObjectHideFlags: 0
@@ -11042,7 +11042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2718925a71a4241b2a52c06eab9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultNickName: Ali
+  DefaultNickName: User
 --- !u!114 &2001831908
 MonoBehaviour:
   m_ObjectHideFlags: 0
