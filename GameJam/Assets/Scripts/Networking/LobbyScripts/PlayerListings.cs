@@ -13,14 +13,22 @@ public class PlayerListings : MonoBehaviourPunCallbacks
 
     private List<PlayerListingDetails> Listings_ = new List<PlayerListingDetails>();
 
-    private void Awake()
+
+    public override void OnEnable()
     {
+        base.OnEnable(); 
         GetAllCurrentRoomPlayers();
     }
 
-    public override void OnLeftRoom()
+    public override void OnDisable()
     {
-        listingsContent_.DestroyChildren();
+        base.OnDisable();
+        for (int i = 0; i < Listings_.Count; i++)
+        {
+            Destroy(Listings_[i].gameObject);
+        }
+
+        Listings_.Clear(); 
     }
 
     private void GetAllCurrentRoomPlayers()
@@ -33,11 +41,20 @@ public class PlayerListings : MonoBehaviourPunCallbacks
 
     private void AddPlayerListing(Player player_)
     {
-        PlayerListingDetails Listing = Instantiate(playerListing_, listingsContent_);
-        if (Listing != null)
+        int index = Listings_.FindIndex(x => x.player == player_);
+        if (index != -1)
         {
-            Listing.SetPlayerInformation(player_);
-            Listings_.Add(Listing);
+            Listings_[index].SetPlayerInformation(player_);
+        }
+
+        else
+        {
+            PlayerListingDetails Listing = Instantiate(playerListing_, listingsContent_);
+            if (Listing != null)
+            {
+                Listing.SetPlayerInformation(player_);
+                Listings_.Add(Listing);
+            }
         }
     }
 
