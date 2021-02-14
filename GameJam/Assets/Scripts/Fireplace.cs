@@ -17,12 +17,12 @@ public class Fireplace : MonoBehaviour
 
     private void Update()
     {
-        if (InteractionSystemManager.Instance.firePlace == false)
+        if (InteractionSystemManager.firePlace == false)
         {
             fireSound.Stop();
             Debug.Log("Stopped fireplace sound from fireplace script");
         }
-        else if (InteractionSystemManager.Instance.firePlace) 
+        else if (InteractionSystemManager.firePlace) 
         {
             fireSound.Play();
         }

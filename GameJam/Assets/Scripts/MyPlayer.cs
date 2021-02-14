@@ -7,9 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MyPlayer : MonoBehaviourPun
-{
-    static List<string> Inventory = new List<string>();
-    
+{   
     public Camera camera; 
     CharacterController characterController; 
     Vector3 playerVel;
@@ -56,24 +54,6 @@ public class MyPlayer : MonoBehaviourPun
 
             playerVel.y += gravity * Time.deltaTime;
             characterController.Move(playerVel * Time.deltaTime);
-        }
-    }
-
-   public void AddToInventory(string item_)
-    {
-        Inventory.Add(item_);
-    }
-
-    public bool CheckInventory(string item_)
-    {
-        if (Inventory.Contains(item_))
-        {
-            return true; 
-        }
-
-        else
-        {
-            return false;
         }
     }
 }

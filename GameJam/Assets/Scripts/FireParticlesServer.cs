@@ -14,17 +14,17 @@ public class FireParticlesServer : MonoBehaviour
 
     public static void ServerStopPlayingFireParticles()
     {
-        if (photonView && photonView.IsMine && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            photonView.RPC("RPC_StopFireParticles", RpcTarget.AllBuffered, photonView.Owner);
+            photonView.RPC("RPC_StopFireParticles", RpcTarget.All, photonView.Owner);
         }
     }
 
     public static void ServerStartPlayingFireParticles()
     {
-        if (photonView && photonView.IsMine && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            photonView.RPC("RPC_PlayFireParticles", RpcTarget.AllBuffered, photonView.Owner);
+            photonView.RPC("RPC_PlayFireParticles", RpcTarget.All, photonView.Owner);
         }
     }
 
@@ -32,11 +32,13 @@ public class FireParticlesServer : MonoBehaviour
     void RPC_StopFireParticles(PhotonMessageInfo info)
     {
         transform.GetComponent<ParticleSystem>().Stop();
+        InteractionSystemManager.firePlace = false; 
     }
 
     [PunRPC]
     void RPC_PlayFireParticles(PhotonMessageInfo info)
     {
         transform.GetComponent<ParticleSystem>().Play();
+        InteractionSystemManager.firePlace = true;
     }
 }

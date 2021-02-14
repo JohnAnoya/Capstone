@@ -35,7 +35,7 @@ public class InteractionSystemManager : MonoBehaviour
     GameObject tempPopup;
     bool showingPopup = false;
 
-    public bool firePlace = true; //Fireplace stuff
+    static public bool firePlace = true; //Fireplace stuff
     public ParticleSystem fireplaceEmitter;
     public AudioSource firePlaceSounds;
     private PhotonView fireParticleView; 
@@ -98,13 +98,12 @@ public class InteractionSystemManager : MonoBehaviour
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Pick up Key");
                 }
 
-                if (!PlayerScript.CheckInventory("Key") && Input.GetMouseButtonDown(0) && !firePlace)
+                if (!Inventory.CheckInventory("Key") && Input.GetMouseButtonDown(0) && !firePlace)
                 {
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
                         Items.Remove("Key");
-                        PlayerScript.AddToInventory("Key");
-                        NetworkingManager.DeleteObject(hit.transform.gameObject);
+                        Inventory.AddToInventory("Key", true, hit.transform.gameObject.name);               
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("Key picked up");
@@ -113,8 +112,7 @@ public class InteractionSystemManager : MonoBehaviour
                     else
                     {
                         Items.Remove("Key");
-                        PlayerScript.AddToInventory("Key");
-                        Destroy(hit.transform.gameObject);
+                        Inventory.AddToInventory("Key", false, hit.transform.gameObject.name);
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("Key picked up");
@@ -145,7 +143,6 @@ public class InteractionSystemManager : MonoBehaviour
                     if (firePlace) //if fireplace is on
                     {
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn on Fireplace"); //Update text
-                        firePlace = false;
 
                         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                         {                          
@@ -157,6 +154,7 @@ public class InteractionSystemManager : MonoBehaviour
 
                         else
                         {
+                            firePlace = false;
                             fireplaceEmitter.Stop();
                             firePlaceSounds.Stop();
                             Destroy(tempPopup);
@@ -171,8 +169,7 @@ public class InteractionSystemManager : MonoBehaviour
                     else
                     {
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn off Fireplace"); //Update text
-                        firePlace = true;
-
+                       
                         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                         {
                             FireParticlesServer.ServerStartPlayingFireParticles();
@@ -183,6 +180,7 @@ public class InteractionSystemManager : MonoBehaviour
 
                         else
                         {
+                            firePlace = true;
                             fireplaceEmitter.Play();
                             firePlaceSounds.Play();
                             Destroy(tempPopup);
@@ -283,14 +281,14 @@ public class InteractionSystemManager : MonoBehaviour
 
             else if (hit.transform.tag == "DoubleDoorTrigger1")
             {
-                if (!showingPopup && !DoubleDoorisOpen && PlayerScript.CheckInventory("Key"))
+                if (!showingPopup && !DoubleDoorisOpen && Inventory.CheckInventory("Key"))
                 {
                     showingPopup = true;
                     tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x - 0.5f, hit.transform.position.y + 0.5f, hit.transform.position.z + 1.0f), Quaternion.identity);
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Open Door");
                 }
 
-                else if (!showingPopup && !DoubleDoorisOpen && !PlayerScript.CheckInventory("Key"))
+                else if (!showingPopup && !DoubleDoorisOpen && !Inventory.CheckInventory("Key"))
                 {
                     showingPopup = true;
                     tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x - 0.5f, hit.transform.position.y + 0.5f, hit.transform.position.z + 1.0f), Quaternion.identity);
@@ -298,11 +296,20 @@ public class InteractionSystemManager : MonoBehaviour
                 }
 
 
-                else if (Interactables.Contains("DoubleDoorTrigger1") && Input.GetMouseButtonDown(0) && !DoubleDoorisOpen && PlayerScript.CheckInventory("Key"))
+                else if (Interactables.Contains("DoubleDoorTrigger1") && Input.GetMouseButtonDown(0) && !DoubleDoorisOpen && Inventory.CheckInventory("Key"))
                 {
                     DoubleDoorisOpen = true;
-                    DoubleDoor[0].SetBool("DoorOpen", true);
-                    DoubleDoor[1].SetBool("DoorOpen", true);              
+
+                    if(PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenDoubleDoors(DoubleDoor[0].gameObject.name, DoubleDoor[1].gameObject.name);
+                    }
+
+                    else {
+                        DoubleDoor[0].SetBool("DoorOpen", true);
+                        DoubleDoor[1].SetBool("DoorOpen", true);                 
+                    }
+
                     Destroy(tempPopup);
                     showingPopup = false;
                 }
@@ -321,9 +328,8 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
-                        NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
                         PotionCount += 1;
-                        PlayerScript.AddToInventory("Potion" + PotionCount.ToString());
+                        Inventory.AddToInventory("Potion" + PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
                         Debug.Log("Potion Count " + PotionCount);
                     }
 
@@ -331,7 +337,7 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         Destroy(hit.transform.parent.gameObject);
                         PotionCount += 1;
-                        PlayerScript.AddToInventory("Potion" + PotionCount.ToString());
+                        Inventory.AddToInventory("Potion" + PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
                         Debug.Log("Potion Count " + PotionCount);
                     }
                 }
@@ -339,9 +345,9 @@ public class InteractionSystemManager : MonoBehaviour
 
             else if (hit.transform.tag == "Brew")
             {
-                Debug.Log("Potion1 is... " + PlayerScript.CheckInventory("Potion1"));
-                Debug.Log("Potion2 is... " + PlayerScript.CheckInventory("Potion2"));
-                Debug.Log("Potion3 is... " + PlayerScript.CheckInventory("Potion3"));
+                Debug.Log("Potion1 is... " + Inventory.CheckInventory("Potion1"));
+                Debug.Log("Potion2 is... " + Inventory.CheckInventory("Potion2"));
+                Debug.Log("Potion3 is... " + Inventory.CheckInventory("Potion3"));
 
                 if (!showingPopup)
                 {
@@ -350,9 +356,9 @@ public class InteractionSystemManager : MonoBehaviour
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Brew Potions " + PotionCount + " /3");
                 }
               
-               else if (PlayerScript.CheckInventory("Potion1") &&
-                   PlayerScript.CheckInventory("Potion2") &&
-                   PlayerScript.CheckInventory("Potion3") &&
+               else if (Inventory.CheckInventory("Potion1") &&
+                   Inventory.CheckInventory("Potion2") &&
+                   Inventory.CheckInventory("Potion3") &&
                    Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
                 {
                    
