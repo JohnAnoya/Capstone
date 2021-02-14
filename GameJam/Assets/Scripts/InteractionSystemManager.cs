@@ -28,8 +28,8 @@ public class InteractionSystemManager : MonoBehaviour
 
     GameObject player; //Reference to Player
 
-    List<string> Items = new List<string>(); //List of Items
-    List<string> Interactables = new List<string>(); //List of Interactables
+    static List<string> Items = new List<string>(); //List of Items
+    static List<string> Interactables = new List<string>(); //List of Interactables
 
     public GameObject InteractionPopUp; //Interaction Notification Popup Prefab
     GameObject tempPopup;
@@ -38,6 +38,7 @@ public class InteractionSystemManager : MonoBehaviour
     public bool firePlace = true; //Fireplace stuff
     public ParticleSystem fireplaceEmitter;
     public AudioSource firePlaceSounds;
+    private PhotonView fireParticleView; 
 
     [SerializeField] //Note stuff
     Image NoteImage; 
@@ -99,12 +100,25 @@ public class InteractionSystemManager : MonoBehaviour
 
                 if (!PlayerScript.CheckInventory("Key") && Input.GetMouseButtonDown(0) && !firePlace)
                 {
-                    Items.Remove("Key");
-                    PlayerScript.AddToInventory("Key");
-                    Destroy(hit.transform.gameObject);
-                    Destroy(tempPopup);
-                    showingPopup = false;
-                    Debug.Log("Key picked up");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        Items.Remove("Key");
+                        PlayerScript.AddToInventory("Key");
+                        NetworkingManager.DeleteObject(hit.transform.gameObject);
+                        Destroy(tempPopup);
+                        showingPopup = false;
+                        Debug.Log("Key picked up");
+                    }
+
+                    else
+                    {
+                        Items.Remove("Key");
+                        PlayerScript.AddToInventory("Key");
+                        Destroy(hit.transform.gameObject);
+                        Destroy(tempPopup);
+                        showingPopup = false;
+                        Debug.Log("Key picked up");
+                    }
                 }
             }
 
@@ -132,10 +146,22 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn on Fireplace"); //Update text
                         firePlace = false;
-                        fireplaceEmitter.Stop();
-                        firePlaceSounds.Stop();
-                        Destroy(tempPopup);
-                        showingPopup = false;
+
+                        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                        {                          
+                            FireParticlesServer.ServerStopPlayingFireParticles();
+                            firePlaceSounds.Stop();
+                            Destroy(tempPopup);
+                            showingPopup = false;
+                        }
+
+                        else
+                        {
+                            fireplaceEmitter.Stop();
+                            firePlaceSounds.Stop();
+                            Destroy(tempPopup);
+                            showingPopup = false;
+                        }
 
                         //switchSound.time = 0.45f;
                         // switchSound.Play();
@@ -146,10 +172,22 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn off Fireplace"); //Update text
                         firePlace = true;
-                        fireplaceEmitter.Play();
-                        firePlaceSounds.Play();
-                        Destroy(tempPopup);
-                        showingPopup = false;
+
+                        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                        {
+                            FireParticlesServer.ServerStartPlayingFireParticles();
+                            firePlaceSounds.Play();
+                            Destroy(tempPopup);
+                            showingPopup = false;
+                        }
+
+                        else
+                        {
+                            fireplaceEmitter.Play();
+                            firePlaceSounds.Play();
+                            Destroy(tempPopup);
+                            showingPopup = false;
+                        }
 
                         //switchSound.time = 0.45f;
                         //switchSound.Play();
@@ -283,7 +321,10 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
-                        //NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
+                        NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
+                        PotionCount += 1;
+                        PlayerScript.AddToInventory("Potion" + PotionCount.ToString());
+                        Debug.Log("Potion Count " + PotionCount);
                     }
 
                     else
@@ -558,7 +599,6 @@ public class InteractionSystemManager : MonoBehaviour
         }
     }
 
-
     IEnumerator SetInteractables()
     {
         yield return new WaitForSeconds(1.0f);
@@ -573,6 +613,7 @@ public class InteractionSystemManager : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("FireplaceSwitch"))
         {
             fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
+            fireParticleView = fireplaceEmitter.GetComponent<PhotonView>(); 
             firePlaceSounds = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<AudioSource>();
         }
 

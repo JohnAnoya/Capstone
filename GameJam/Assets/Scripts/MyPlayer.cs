@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class MyPlayer : MonoBehaviourPun
 {
-    List<string> Inventory = new List<string>();
+    static List<string> Inventory = new List<string>();
     
     public Camera camera; 
     CharacterController characterController; 

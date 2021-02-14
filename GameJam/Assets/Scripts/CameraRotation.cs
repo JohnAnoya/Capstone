@@ -25,35 +25,38 @@ public class CameraRotation : MonoBehaviourPun
     // Update is called once per frame
     void LateUpdate()
     {
-        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && base.photonView.IsMine)
+        if (Player)
         {
-            float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
-            float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && base.photonView.IsMine)
+            {
+                float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
+                float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
-            XRotate -= mouseYAxis;
-            XRotate = Mathf.Clamp(XRotate, -90f, 90f);
-            yRotate += mouseXAxis;
+                XRotate -= mouseYAxis;
+                XRotate = Mathf.Clamp(XRotate, -90f, 90f);
+                yRotate += mouseXAxis;
 
-            Player.localRotation = Quaternion.Euler(0.0f, yRotate, 0.0f);
-            transform.localRotation = Quaternion.Euler(XRotate, 0f, 0f);
-        }
+                Player.localRotation = Quaternion.Euler(0.0f, yRotate, 0.0f);
+                transform.localRotation = Quaternion.Euler(XRotate, 0f, 0f);
+            }
 
-        else if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !base.photonView.IsMine)
-        {
-            Destroy(this);
-        }
+            else if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !base.photonView.IsMine)
+            {
+                Destroy(this);
+            }
 
-        else
-        {
-            float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
-            float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
+            else
+            {
+                float mouseXAxis = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
+                float mouseYAxis = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
-            XRotate -= mouseYAxis;
-            XRotate = Mathf.Clamp(XRotate, -90f, 90f);
-            yRotate += mouseXAxis;
+                XRotate -= mouseYAxis;
+                XRotate = Mathf.Clamp(XRotate, -90f, 90f);
+                yRotate += mouseXAxis;
 
-            Player.localRotation = Quaternion.Euler(0.0f, yRotate, 0.0f);
-            transform.localRotation = Quaternion.Euler(XRotate, 0f, 0f);
+                Player.localRotation = Quaternion.Euler(0.0f, yRotate, 0.0f);
+                transform.localRotation = Quaternion.Euler(XRotate, 0f, 0f);
+            }
         }
     }
 }

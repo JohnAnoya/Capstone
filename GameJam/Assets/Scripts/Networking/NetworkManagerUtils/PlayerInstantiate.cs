@@ -21,8 +21,10 @@ public class PlayerInstantiate : MonoBehaviour
         else 
         {
             Debug.Log("Creating local player");
-            Instantiate(player_, transform.position, Quaternion.identity);
-            GameObject.FindObjectOfType<Camera>().enabled = true;
+            var plr = Instantiate(player_, transform.position, Quaternion.identity);
+            var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
+            newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
+            newCamera.transform.parent = plr.transform;
         }
     }
 
