@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5995954328004438650}
   - component: {fileID: 196597348690916740}
   - component: {fileID: 4615453791903971524}
-  - component: {fileID: 5647773979998064031}
   - component: {fileID: 5965795332274716154}
   - component: {fileID: 6279995188909473623}
   - component: {fileID: 9136545874431164190}
@@ -132,31 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5e146cc04e19746ab74d3ca53dc30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5647773979998064031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3061643358926509580}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd95fca79025e949ba20346b305b57f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractionPopUp: {fileID: 701447873355874855, guid: 74b62af4b4e9ec94f8f3d0aa79e6c5a3,
-    type: 3}
-  fireplaceEmitter: {fileID: 0}
-  note1: {fileID: 0}
-  note2: {fileID: 0}
-  note3: {fileID: 0}
-  note4: {fileID: 0}
-  note5: {fileID: 0}
-  Notes: []
-  RightDoubleDoor: {fileID: 0}
-  LeftDoubleDoor: {fileID: 0}
-  SingleDoorPrison: {fileID: 0}
-  ExitDoor: {fileID: 0}
 --- !u!82 &5965795332274716154
 AudioSource:
   m_ObjectHideFlags: 0

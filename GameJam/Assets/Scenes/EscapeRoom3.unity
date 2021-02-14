@@ -5093,6 +5093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 862850134}
   - component: {fileID: 862850135}
+  - component: {fileID: 862850136}
   m_Layer: 0
   m_Name: DoubleDoorTrigger
   m_TagString: Untagged
@@ -5127,6 +5128,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25890732, y: 3.247354, z: 3.428184}
   m_Center: {x: 0.37054634, y: 0.5957582, z: 0.08917999}
+--- !u!114 &862850136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862850133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &870622131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8798,6 +8821,7 @@ GameObject:
   - component: {fileID: 1376868557}
   - component: {fileID: 1376868556}
   - component: {fileID: 1376868555}
+  - component: {fileID: 1376868558}
   m_Layer: 0
   m_Name: SceneChangerObject
   m_TagString: Untagged
@@ -8847,6 +8871,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 66
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376868558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376868554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1380514699
 PrefabInstance:
   m_ObjectHideFlags: 0

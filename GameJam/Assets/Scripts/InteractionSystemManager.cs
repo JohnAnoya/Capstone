@@ -49,8 +49,6 @@ public class InteractionSystemManager : MonoBehaviour
     [SerializeField] private Animator ExitDoor = null;
     bool DoubleDoorisOpen = false;
 
-    int PotionCount = 0;
-
    // AudioSource switchSound;
     GameObject AnswerScreen;
 
@@ -207,7 +205,18 @@ public class InteractionSystemManager : MonoBehaviour
 
                 if (Interactables.Contains("PrisonSwitch") && Input.GetMouseButtonDown(0))
                 {
-                    SingleDoorPrison.Play("SingleDoorOpen", 0, 0.0f);
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSingleDoor(SingleDoorPrison.gameObject.name);
+                    }
+
+                    else
+                    {
+                        SingleDoorPrison.SetBool("DoorOpen", true);                
+                    }
+
+                    Destroy(tempPopup);
+                    showingPopup = false;
 
                     //switchSound.time = 0.45f;
                     //switchSound.Play();  
@@ -324,21 +333,19 @@ public class InteractionSystemManager : MonoBehaviour
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Pickup Potion");
                 }
 
-                else if (Items.Contains("Potion") && Input.GetMouseButtonDown(0) && PotionCount < 4)
+                else if (Items.Contains("Potion") && Input.GetMouseButtonDown(0) && Inventory.PotionCount < 4)
                 {
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
-                        PotionCount += 1;
-                        Inventory.AddToInventory("Potion" + PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
-                        Debug.Log("Potion Count " + PotionCount);
+                        Inventory.AddToInventory("Potion" + Inventory.PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
+                        Debug.Log("Potion Count " + Inventory.PotionCount);
                     }
 
                     else
                     {
                         Destroy(hit.transform.parent.gameObject);
-                        PotionCount += 1;
-                        Inventory.AddToInventory("Potion" + PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
-                        Debug.Log("Potion Count " + PotionCount);
+                        Inventory.AddToInventory("Potion" + Inventory.PotionCount.ToString(), true, hit.transform.parent.gameObject.name);
+                        Debug.Log("Potion Count " + Inventory.PotionCount);
                     }
                 }
             }
@@ -353,7 +360,7 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     showingPopup = true;
                     tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
-                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Brew Potions " + PotionCount + " /3");
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Brew Potions " + Inventory.PotionCount + " /3");
                 }
               
                else if (Inventory.CheckInventory("Potion1") &&
@@ -361,12 +368,19 @@ public class InteractionSystemManager : MonoBehaviour
                    Inventory.CheckInventory("Potion3") &&
                    Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
                 {
-                   
                     DoubleDoorisOpen = true;
-                    DoubleDoor[0].SetBool("DoorOpen", true);
-                    DoubleDoor[1].SetBool("DoorOpen", true);
-                }
 
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenDoubleDoors(DoubleDoor[0].gameObject.name, DoubleDoor[1].gameObject.name);
+                    }
+
+                    else
+                    {
+                        DoubleDoor[0].SetBool("DoorOpen", true);
+                        DoubleDoor[1].SetBool("DoorOpen", true);
+                    }
+                }
             }
 
             else if (hit.transform.tag == "1KeyPad")

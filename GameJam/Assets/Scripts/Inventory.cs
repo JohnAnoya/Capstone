@@ -7,7 +7,9 @@ public class Inventory : MonoBehaviour
 {
     static PhotonView photonView;
     static List<string> CurrentInventory = new List<string>();
-    static bool hasItem = false; 
+    static bool hasItem = false;
+
+    static public int PotionCount = 0;
 
     private void Awake()
     {
@@ -28,6 +30,11 @@ public class Inventory : MonoBehaviour
             if (removeItemFromScene_)
             {
                 Debug.Log("Removing Client Side");
+                if (gameObjectName_.Contains("Potion"))
+                {
+                    PotionCount += 1;
+                }
+
                 CurrentInventory.Add(item_);
                 Destroy(GameObject.Find(gameObjectName_));
             }
@@ -56,7 +63,17 @@ public class Inventory : MonoBehaviour
 
         if(removeItemFromScene_)
         {
-            NetworkingManager.DeleteObject(GameObject.Find(gameObjectName_));
+            if (gameObjectName_.Contains("Potion"))
+            {
+                PotionCount += 1;
+                Debug.Log("Adding Potion" + PotionCount + " to Inventory!");
+                CurrentInventory.Add("Potion" + PotionCount);
+            }
+
+            if (photonView.IsMine)
+            {
+                NetworkingManager.DeleteObject(GameObject.Find(gameObjectName_));
+            }
         }
     }
 }

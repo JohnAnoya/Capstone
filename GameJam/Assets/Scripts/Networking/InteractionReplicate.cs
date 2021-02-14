@@ -8,6 +8,7 @@ public class InteractionReplicate : MonoBehaviour
     static PhotonView photonView;
 
     private Animator[] DoubleDoor = new Animator[2];
+    private Animator SingleDoor; 
 
     private void Awake()
     {
@@ -23,6 +24,14 @@ public class InteractionReplicate : MonoBehaviour
         }
     }
 
+    public static void OpenSingleDoor(string doorName_)
+    {
+        if(photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_OpenSingleDoor", RpcTarget.All, doorName_);
+        }
+    }
+
 
     [PunRPC]
     void RPC_OpenDoubleDoors(string leftDoorName_, string rightDoorName_)
@@ -35,12 +44,34 @@ public class InteractionReplicate : MonoBehaviour
             if (DoubleDoor != null)
             {
                 Debug.Log("Opening Doors Serverside");
-                DoubleDoor[0].SetBool("DoorOpen", true);
-                DoubleDoor[1].SetBool("DoorOpen", true);
 
-                if (GameObject.Find("DoubleDoorTrigger"))
+                if (photonView.IsMine)
                 {
-                    NetworkingManager.DeleteObject(GameObject.Find("DoubleDoorTrigger"));
+                    DoubleDoor[0].SetBool("DoorOpen", true);
+                    DoubleDoor[1].SetBool("DoorOpen", true);
+
+                    if (GameObject.Find("DoubleDoorTrigger"))
+                    {
+                        NetworkingManager.DeleteObject(GameObject.Find("DoubleDoorTrigger"));
+                    }
+                }
+            }
+        }
+    }
+
+    [PunRPC]
+    void RPC_OpenSingleDoor(string doorName_)
+    {
+        if (GameObject.Find(doorName_))
+        {
+            SingleDoor = GameObject.Find(doorName_).GetComponent<Animator>();
+
+            if(SingleDoor != null)
+            {
+                Debug.Log("Opening Single Door SERVER SIDE");
+                if(photonView.IsMine)
+                {
+                    SingleDoor.SetBool("DoorOpen", true);
                 }
             }
         }
