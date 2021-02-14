@@ -31,7 +31,6 @@ public class PlayerInstantiate : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Debug.Log("CREATING SERVER SIDE PLAYER");
-        Debug.LogError("MAKING NEW CHARACTER GUISS");
         Vector2 offset = Random.insideUnitCircle * 3.0f;
         Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
         var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);

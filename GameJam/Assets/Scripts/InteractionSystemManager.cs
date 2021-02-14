@@ -283,7 +283,7 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
-                        NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
+                        //NetworkingManager.DeleteObject(hit.transform.parent.gameObject);
                     }
 
                     else

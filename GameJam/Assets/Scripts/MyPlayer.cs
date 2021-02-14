@@ -21,6 +21,7 @@ public class MyPlayer : MonoBehaviourPun
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
+        camera = gameObject.GetComponentInChildren<Camera>(); 
     }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class MyPlayer : MonoBehaviourPun
         else if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !base.photonView.IsMine)
         {
             Destroy(characterController);
-            Destroy(camera.transform.parent.GetComponent<CameraRotation>());
+            Destroy(camera);
         }
 
         else

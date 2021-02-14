@@ -8,7 +8,7 @@ public class ResourcePrefabPathBuilder : IPreprocessBuildWithReport
 
     public void OnPreprocessBuild(BuildReport report)
     {
-        NetworkingManager.PopulatePrefabsonNetwork();
+        //NetworkingManager.PopulatePrefabsonNetwork();
     }
     
 }
