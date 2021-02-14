@@ -237,7 +237,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 if (Interactables.Contains("BookButton") && Input.GetMouseButtonDown(0))
                 {
-                    ExitDoor.Play("ExitDoorOpen", 0, 0.0f);
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSingleDoor(ExitDoor.gameObject.name);
+                    }
+
+                    else
+                    {
+                        ExitDoor.SetBool("DoorOpen", true);
+                    }
 
                     //switchSound.time = 0.45f;
                     //switchSound.Play();
@@ -396,7 +404,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("1KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "1");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("1");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "1");
+                    }
                 }
             }
 
@@ -413,7 +429,16 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("2KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "2");
+
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("2");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "2");
+                    }
                 }
             }
 
@@ -430,7 +455,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("3KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "3");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("3");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "3");
+                    }
                 }
             }
 
@@ -446,7 +479,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("4KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "4");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("4");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "4");
+                    }
                 }
             }
 
@@ -462,7 +503,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("5KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "5");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("5");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "5");
+                    }
                 }
             }
 
@@ -478,7 +527,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("6KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "6");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("6");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "6");
+                    }
                 }
             }
 
@@ -494,7 +551,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("7KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "7");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("7");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "7");
+                    }
                 }
             }
 
@@ -510,7 +575,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("8KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "8");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("8");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "8");
+                    }
                 }
             }
 
@@ -526,7 +599,15 @@ public class InteractionSystemManager : MonoBehaviour
 
                 else if (Interactables.Contains("9KeyPad") && Input.GetMouseButtonDown(0) && AnswerScreen.GetComponentInChildren<TMP_Text>().text.Length < 9)
                 {
-                    AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "9");
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.UpdateAnswerScreenOnServer("9");
+                    }
+
+                    else
+                    {
+                        AnswerScreen.GetComponentInChildren<TMP_Text>().SetText(AnswerScreen.GetComponentInChildren<TMP_Text>().text + "9");
+                    }
                 }
             }
 
@@ -548,13 +629,21 @@ public class InteractionSystemManager : MonoBehaviour
 
                         if (AnswerScreen.GetComponentInChildren<TMP_Text>().text == passcodescript.GetPassCode())
                         {
-                            DoubleDoor[0].Play("RightDoubleDoorOpen", 0, 0.0f);
-                            DoubleDoor[1].Play("LeftDoubleDoorOpen", 0, 0.0f);
+                            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                            {
+                                InteractionReplicate.OpenDoubleDoors(DoubleDoor[0].gameObject.name, DoubleDoor[1].gameObject.name);
+                            }
+
+                            else
+                            {
+                                DoubleDoor[0].SetBool("DoorOpen", true);
+                                DoubleDoor[1].SetBool("DoorOpen", true);
+                            }
                         }
 
                         else
                         {
-
+                        
                         }
                     }
                 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun; 
+using Photon.Pun;
+using TMPro;
 
 public class InteractionReplicate : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class InteractionReplicate : MonoBehaviour
 
     private Animator[] DoubleDoor = new Animator[2];
     private Animator SingleDoor; 
+    private TextMeshProUGUI AnswerScreenText; 
 
     private void Awake()
     {
@@ -32,6 +34,14 @@ public class InteractionReplicate : MonoBehaviour
         }
     }
 
+    public static void UpdateAnswerScreenOnServer(string keyPressed_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_UpdateAnswerScreen", RpcTarget.All, keyPressed_);
+        }
+    }
+
 
     [PunRPC]
     void RPC_OpenDoubleDoors(string leftDoorName_, string rightDoorName_)
@@ -45,11 +55,11 @@ public class InteractionReplicate : MonoBehaviour
             {
                 Debug.Log("Opening Doors Serverside");
 
-                if (photonView.IsMine)
-                {
-                    DoubleDoor[0].SetBool("DoorOpen", true);
-                    DoubleDoor[1].SetBool("DoorOpen", true);
+                DoubleDoor[0].SetBool("DoorOpen", true);
+                DoubleDoor[1].SetBool("DoorOpen", true);
 
+                if (photonView.IsMine)
+                {            
                     if (GameObject.Find("DoubleDoorTrigger"))
                     {
                         NetworkingManager.DeleteObject(GameObject.Find("DoubleDoorTrigger"));
@@ -75,5 +85,16 @@ public class InteractionReplicate : MonoBehaviour
                 }
             }
         }
+    }
+
+    [PunRPC]
+    void RPC_UpdateAnswerScreen(string keyPressed_)
+    {
+        if (AnswerScreenText == null)
+        {
+            AnswerScreenText = GameObject.Find("AnswerText").GetComponent<TextMeshProUGUI>(); 
+        }
+
+        AnswerScreenText.text = AnswerScreenText.text + keyPressed_;
     }
 }
