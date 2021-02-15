@@ -6,13 +6,18 @@ using Photon.Realtime;
 
 public class TestConnect : MonoBehaviourPunCallbacks
 {
-    private void Start()
+    public void ConnectToServer()
     {
         Debug.Log("Connecting to Server...");
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = transform.GetComponent<NetworkingManager>().Settings.NewNickName();
         PhotonNetwork.GameVersion = "0.0.2";
         PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public void DisconnectFromServer()
+    {
+        PhotonNetwork.Disconnect(); 
     }
 
     public override void OnConnectedToMaster()

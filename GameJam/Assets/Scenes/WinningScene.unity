@@ -900,7 +900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Congraulations
+  m_text: Congratulations
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60ee77eac37b27f40980b0a15c070a53, type: 2}
   m_sharedMaterial: {fileID: 7742424796800641504, guid: 60ee77eac37b27f40980b0a15c070a53,
@@ -1100,6 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e845fd26155854b94397ed594a510c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
 --- !u!4 &2085282552
 Transform:
   m_ObjectHideFlags: 0

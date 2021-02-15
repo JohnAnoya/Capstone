@@ -82,8 +82,16 @@ public class PlayerListings : MonoBehaviourPunCallbacks
         }
     }
 
-    public void StartMultiplayerGame ()
+    public void StartMultiplayerGame()
     {
-        PhotonNetwork.LoadLevel("EscapeRoom1");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("EscapeRoom1");
+        }
+
+        else
+        {
+            Debug.LogWarning("You can't start the game because you are not the host!");
+        }
     }
 }
