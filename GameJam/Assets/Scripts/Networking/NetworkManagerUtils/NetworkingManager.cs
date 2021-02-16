@@ -15,9 +15,6 @@ public class NetworkingManager : MonoBehaviour
     private static NetworkingManager instance_;
     public static NetworkingManager Instance { get { return instance_; } }
 
-    [SerializeField]
-    GameObject interactionReplication; 
-
     void Awake()
     {
         if (instance_ != null && instance_ != this)
@@ -53,15 +50,5 @@ public class NetworkingManager : MonoBehaviour
     public static void DeleteObject(GameObject object_)
     {
         PhotonNetwork.Destroy(object_);
-    }
-
-
-    IEnumerator AddNewInteractionReplication()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("INSTANTIATING NEW INTERACTION REPLICATION");
-        var newInteractionReplication = Instantiate(interactionReplication, transform.position, Quaternion.identity);
-        newInteractionReplication.GetComponent<PhotonView>().ViewID = 51;
-        newInteractionReplication.transform.parent = GameObject.Find("NetworkingManager").transform;
     }
 }

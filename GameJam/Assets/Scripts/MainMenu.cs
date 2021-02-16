@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
     public void GoBackToMainMenu()
     {
         Destroy(GameObject.Find("NetworkingManager/InteractionReplication"));
+        Destroy(GameObject.Find("InteractionSystemManager/Inventory"));
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             PhotonNetwork.Disconnect(); 
