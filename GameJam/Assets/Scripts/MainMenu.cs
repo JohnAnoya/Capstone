@@ -22,16 +22,23 @@ public class MainMenu : MonoBehaviour
 
     public void GoBackToMainMenu()
     {
-        if(PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        Destroy(GameObject.Find("NetworkingManager/InteractionReplication"));
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             PhotonNetwork.Disconnect(); 
         }
 
-        SceneManager.LoadScene("MainMenu");   
+        StartCoroutine(LoadMainMenu());
     }
 
     public void Exit ()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadMainMenu()
+    {
+        yield return new WaitForSeconds(0.025f);
+        SceneManager.LoadScene("MainMenu");
     }
 }
