@@ -24,6 +24,18 @@ EditorBuildSettings:
     path: Assets/Scenes/EscapeRoom5.unity
     guid: b01123c359876e14c9b1b956d33a3fa7
   - enabled: 1
+    path: Assets/Scenes/SciFiRooms/EscapeRoom6.unity
+    guid: c70f2657ecd3e38429f557d70aebe523
+  - enabled: 1
+    path: Assets/Scenes/SciFiRooms/EscapeRoom7.unity
+    guid: d6813dd67fa480040b8d8f6372636d66
+  - enabled: 1
+    path: Assets/Scenes/SciFiRooms/EscapeRoom8.unity
+    guid: ac4e59bfce2558f408c24bc82e339835
+  - enabled: 1
+    path: Assets/Scenes/SciFiRooms/EscapeRoom9.unity
+    guid: 656ad640cedacda4282260cc1015fbfc
+  - enabled: 1
     path: Assets/Scenes/WinningScene.unity
     guid: 64aa0020bc42568448dfdb81912d570a
   - enabled: 1

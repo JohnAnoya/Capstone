@@ -58,7 +58,7 @@ public class InteractionSystemManager : MonoBehaviour
     void Start()
     {
         //Assigning Items and Interactables
-        AddToItemList("Key", "Potion");
+        AddToItemList("Key", "Potion", "KeyCard");
 
         AddToInteractableList("FireplaceSwitch", "PrisonSwitch", "Note", "Note2", "Note3", "Note4", "Note5",
            "DoubleDoorTrigger1", "DoubleDoorTrigger2", "DoubleDoorTrigger3", "Brew", "BookButton",
@@ -101,7 +101,7 @@ public class InteractionSystemManager : MonoBehaviour
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
                         Items.Remove("Key");
-                        Inventory.AddToInventory("Key", true, hit.transform.gameObject.name);               
+                        Inventory.AddToInventory("Key", true, hit.transform.gameObject.name);
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("Key picked up");
@@ -110,7 +110,7 @@ public class InteractionSystemManager : MonoBehaviour
                     else
                     {
                         Items.Remove("Key");
-                        Inventory.AddToInventory("Key", false, hit.transform.gameObject.name);
+                        Inventory.AddToInventory("Key", true, hit.transform.gameObject.name);
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("Key picked up");
@@ -143,7 +143,7 @@ public class InteractionSystemManager : MonoBehaviour
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn on Fireplace"); //Update text
 
                         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
-                        {                          
+                        {
                             FireParticlesServer.ServerStopPlayingFireParticles();
                             firePlaceSounds.Stop();
                             Destroy(tempPopup);
@@ -167,7 +167,7 @@ public class InteractionSystemManager : MonoBehaviour
                     else
                     {
                         tempPopup.GetComponentInChildren<TMP_Text>().SetText("Turn off Fireplace"); //Update text
-                       
+
                         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                         {
                             FireParticlesServer.ServerStartPlayingFireParticles();
@@ -212,7 +212,7 @@ public class InteractionSystemManager : MonoBehaviour
 
                     else
                     {
-                        SingleDoorPrison.SetBool("DoorOpen", true);                
+                        SingleDoorPrison.SetBool("DoorOpen", true);
                     }
 
                     Destroy(tempPopup);
@@ -317,14 +317,15 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     DoubleDoorisOpen = true;
 
-                    if(PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
                     {
                         InteractionReplicate.OpenDoubleDoors(DoubleDoor[0].gameObject.name, DoubleDoor[1].gameObject.name);
                     }
 
-                    else {
+                    else
+                    {
                         DoubleDoor[0].SetBool("DoorOpen", true);
-                        DoubleDoor[1].SetBool("DoorOpen", true);                 
+                        DoubleDoor[1].SetBool("DoorOpen", true);
                     }
 
                     Destroy(tempPopup);
@@ -370,11 +371,11 @@ public class InteractionSystemManager : MonoBehaviour
                     tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Brew Potions " + Inventory.PotionCount + " /3");
                 }
-              
-               else if (Inventory.CheckInventory("Potion1") &&
-                   Inventory.CheckInventory("Potion2") &&
-                   Inventory.CheckInventory("Potion3") &&
-                   Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
+
+                else if (Inventory.CheckInventory("Potion1") &&
+                    Inventory.CheckInventory("Potion2") &&
+                    Inventory.CheckInventory("Potion3") &&
+                    Input.GetMouseButtonDown(0) && !DoubleDoorisOpen)
                 {
                     DoubleDoorisOpen = true;
 
@@ -643,7 +644,7 @@ public class InteractionSystemManager : MonoBehaviour
 
                         else
                         {
-                        
+
                         }
                     }
                 }
@@ -662,6 +663,38 @@ public class InteractionSystemManager : MonoBehaviour
                 else if (Interactables.Contains("Reset") && Input.GetMouseButtonDown(0))
                 {
                     AnswerScreen.GetComponentInChildren<TMP_Text>().SetText("");
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCard")
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 0.2f), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Pick up KeyCard");
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+                }
+
+                if (!Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        Items.Remove("KeyCard");
+                        Inventory.AddToInventory("KeyCard", true, hit.transform.gameObject.name);
+                        Destroy(tempPopup);
+                        showingPopup = false;
+                        Debug.Log("KeyCard picked up");
+                    }
+
+                    else
+                    {
+                        Items.Remove("KeyCard");
+                        Inventory.AddToInventory("KeyCard", true, hit.transform.gameObject.name);
+                        Destroy(tempPopup);
+                        showingPopup = false;
+                        Debug.Log("KeyCard picked up");
+                    }
                 }
             }
         }

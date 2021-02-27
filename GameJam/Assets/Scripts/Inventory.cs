@@ -9,7 +9,11 @@ public class Inventory : MonoBehaviour
     static List<string> CurrentInventory = new List<string>();
     static bool hasItem = false;
 
+    //Dungeon Room
     static public int PotionCount = 0;
+
+    //Sci-Fi Room 
+    static public int KeyCardUpgradeCount = 0; 
 
     private void Awake()
     {
