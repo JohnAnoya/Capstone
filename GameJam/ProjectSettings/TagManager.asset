@@ -50,6 +50,7 @@ TagManager:
   - GreenCube
   - RedCube
   - BlueCube
+  - PlayerListings
   layers:
   - Default
   - TransparentFX
