@@ -688,7 +688,8 @@ public class InteractionSystemManager : MonoBehaviour
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("KeyCard picked up");
-                       
+                        SoundHandler.Instance.PlayPickUpCard();
+
                     }
 
                     else
@@ -730,6 +731,7 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[0].gameObject.name);
                         SciFiDoubleDoorisOpen[0] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
 
                     else
@@ -737,7 +739,12 @@ public class InteractionSystemManager : MonoBehaviour
                         Debug.Log("Trying to Open the Door!");
                         SciFiDoubleDoor[0].SetBool("DoorOpen", true);
                         SciFiDoubleDoorisOpen[0] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
+                }
+                else if (Interactables.Contains("KeyCardScanner1") && !Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0)) 
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
                 }
             }
 
@@ -768,6 +775,8 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[1].gameObject.name);
                         SciFiDoubleDoorisOpen[1] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
+
                     }
 
                     else
@@ -775,7 +784,17 @@ public class InteractionSystemManager : MonoBehaviour
                         Debug.Log("Trying to Open the Door!");
                         SciFiDoubleDoor[1].SetBool("DoorOpen", true);
                         SciFiDoubleDoorisOpen[1] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
+
                     }
+                }
+                else if (Interactables.Contains("KeyCardScanner2") && !Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
+                }
+                else if (Interactables.Contains("KeyCardScanner2") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount < 2 && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
                 }
             }
 
@@ -806,6 +825,7 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[2].gameObject.name);
                         SciFiDoubleDoorisOpen[2] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
 
                     else
@@ -813,7 +833,16 @@ public class InteractionSystemManager : MonoBehaviour
                         Debug.Log("Trying to Open the Door!");
                         SciFiDoubleDoor[2].SetBool("DoorOpen", true);
                         SciFiDoubleDoorisOpen[2] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
+                }
+                else if (Interactables.Contains("KeyCardScanner3") && !Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
+                }
+                else if (Interactables.Contains("KeyCardScanner3") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount < 3 && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
                 }
             }
 
@@ -844,6 +873,7 @@ public class InteractionSystemManager : MonoBehaviour
                     {
                         InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[3].gameObject.name);
                         SciFiDoubleDoorisOpen[3] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
 
                     else
@@ -851,7 +881,16 @@ public class InteractionSystemManager : MonoBehaviour
                         Debug.Log("Trying to Open the Door!");
                         SciFiDoubleDoor[3].SetBool("DoorOpen", true);
                         SciFiDoubleDoorisOpen[3] = true;
+                        SoundHandler.Instance.PlayAccessGranted();
                     }
+                }
+                else if (Interactables.Contains("KeyCardScanner4") && !Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
+                }
+                else if (Interactables.Contains("KeyCardScanner4") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount < 4 && Input.GetMouseButtonDown(0))
+                {
+                    SoundHandler.Instance.PlayAccessDenied();
                 }
             }
 
