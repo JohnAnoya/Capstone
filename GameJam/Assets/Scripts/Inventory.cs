@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 public class Inventory : MonoBehaviour
@@ -18,6 +19,25 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         photonView = transform.GetComponent<PhotonView>();
+    }
+
+    private void Start()
+    {
+        SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes
+    }
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
+        {
+            PotionCount = 0;
+            KeyCardUpgradeCount = 1; 
+        }
+    }
+
+    public static void RemoveFromInventory(string item_)
+    {
+        CurrentInventory.Remove(item_);
     }
 
     public static void AddToInventory(string item_, bool removeItemFromScene_, string gameObjectName_)

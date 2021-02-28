@@ -4585,6 +4585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSize: 0.5
   CurrentSize: 0.1
+  isDraggingCube: 0
 --- !u!4 &218569479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 497898, guid: 1b9426746a4365c40b24a81f6ad2daea,
@@ -28869,6 +28870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSize: 0.5
   CurrentSize: 0.5
+  isDraggingCube: 0
 --- !u!1001 &1568135847
 PrefabInstance:
   m_ObjectHideFlags: 0

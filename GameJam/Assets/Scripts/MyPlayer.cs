@@ -12,7 +12,7 @@ public class MyPlayer : MonoBehaviourPun
     CharacterController characterController; 
     Vector3 playerVel;
     float WalkSpeed = 8.0f;
-    float gravity = -9.81f;
+    float gravity = -8.0f;
     float thickness = 1.0f;
 
     // Start is called before the first frame update
@@ -33,9 +33,7 @@ public class MyPlayer : MonoBehaviourPun
             Vector3 move = transform.right * XAxis + transform.forward * ZAxis;
             characterController.Move(move * Time.deltaTime * WalkSpeed);
 
-            playerVel.y += gravity * Time.deltaTime;
-            characterController.Move(playerVel * Time.deltaTime);
-          
+            characterController.Move(new Vector3(playerVel.x, gravity, playerVel.z) * Time.deltaTime);
         }
 
         else if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !base.photonView.IsMine)
@@ -52,8 +50,7 @@ public class MyPlayer : MonoBehaviourPun
             Vector3 move = transform.right * XAxis + transform.forward * ZAxis;
             characterController.Move(move * Time.deltaTime * WalkSpeed);
 
-            playerVel.y += gravity * Time.deltaTime;
-            characterController.Move(playerVel * Time.deltaTime);
+            characterController.Move(new Vector3(playerVel.x, gravity, playerVel.z) * Time.deltaTime);     
         }
     }
 }

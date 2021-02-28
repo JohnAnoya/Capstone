@@ -62,9 +62,6 @@ public class InteractionSystemManager : MonoBehaviour
 
     void Start()
     {
-        //Assigning Items and Interactables
-        AddToItemList("Key", "Potion", "KeyCard");
-
         AddToInteractableList("FireplaceSwitch", "PrisonSwitch", "Note", "Note2", "Note3", "Note4", "Note5",
            "DoubleDoorTrigger1", "DoubleDoorTrigger2", "DoubleDoorTrigger3", "Brew", "BookButton",
            "1KeyPad", "2KeyPad", "3KeyPad", "4KeyPad", "5KeyPad", "6KeyPad", "7KeyPad", "8KeyPad", 
@@ -880,7 +877,7 @@ public class InteractionSystemManager : MonoBehaviour
                 if (!showingPopup)
                 {
                     showingPopup = true;
-                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y + 2.0f, hit.transform.position.z), Quaternion.identity);
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
                     tempPopup.GetComponentInChildren<TMP_Text>().SetText("Upgrade Key Card");
                     tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
                 }
@@ -985,6 +982,14 @@ public class InteractionSystemManager : MonoBehaviour
     {
         if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
         {
+            AddToItemList("Key", "Potion", "KeyCard");
+            Inventory.RemoveFromInventory("Key");
+            Inventory.RemoveFromInventory("KeyCard");
+            Inventory.RemoveFromInventory("Potion");
+            SciFiDoubleDoorisOpen[0] = false;
+            SciFiDoubleDoorisOpen[1] = false;
+            SciFiDoubleDoorisOpen[2] = false;
+            SciFiDoubleDoorisOpen[3] = false; 
             StartCoroutine(SetInteractables());
         }
     }
