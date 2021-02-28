@@ -47,6 +47,9 @@ TagManager:
   - KeyCardUpgrader3
   - KeyCardScanner4
   - DraggableCube
+  - GreenCube
+  - RedCube
+  - BlueCube
   layers:
   - Default
   - TransparentFX

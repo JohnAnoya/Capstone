@@ -44,8 +44,6 @@ public class InteractionSystemManager : MonoBehaviour
     Image NoteImage; 
     bool showingNote = false;
 
-
-    bool isDraggingCube = false;
     private string CurrentCubeDragging = "";
 
     [SerializeField] private Animator[] SciFiDoubleDoor = new Animator[4];
@@ -915,7 +913,7 @@ public class InteractionSystemManager : MonoBehaviour
                 }
             }
 
-            else if (hit.transform.tag == "DraggableCube" && !isDraggingCube)
+            else if (hit.transform.tag == "DraggableCube" && !hit.transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube)
             {
                 if (!showingPopup)
                 {
@@ -929,7 +927,7 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     Destroy(tempPopup);
                     showingPopup = false;
-                    isDraggingCube = true;
+                    hit.transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = true;
                     CurrentCubeDragging = hit.transform.name;
                 }
             }
@@ -952,13 +950,14 @@ public class InteractionSystemManager : MonoBehaviour
             showingNote = false;
         }
 
-        else if (isDraggingCube && Input.GetMouseButtonDown(0))
+        else if (CurrentCubeDragging.Length > 0 && GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube && Input.GetMouseButtonDown(0))
         {
-            isDraggingCube = false;
+            GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = false;
             GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = true;
+            CurrentCubeDragging = "";
         }
 
-        else if (isDraggingCube)
+        else if (CurrentCubeDragging.Length > 0 && GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube)
         {
             Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
             GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = false;

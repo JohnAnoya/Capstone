@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     
         }
 
-        else if (mapSelection_.Contains("Room6"))
+        else if (mapSelection_.Contains("Room8"))
         {
             SinglePlayerMapSelected.text = "MAP SELECTED: SCI-FI MAP";
         }

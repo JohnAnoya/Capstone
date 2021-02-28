@@ -9,6 +9,8 @@ public class CubeProperties : MonoBehaviour
     [SerializeField]
     private float CurrentSize;
 
+    public bool isDraggingCube = false;
+
     public void ReSize()
     {
         Vector3 newScale = new Vector3(MaxSize, MaxSize, MaxSize);

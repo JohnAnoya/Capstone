@@ -27,6 +27,14 @@ public class InteractionReplicate : MonoBehaviour
         }
     }
 
+    public static void CloseSciFiDoubleDoors(string doubleDoorName_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_CloseSciFiDoubleDoors", RpcTarget.All, doubleDoorName_);
+        }
+    }
+
     public static void OpenDoubleDoors(string leftDoorName_, string rightDoorName_)
     {
         if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
@@ -62,6 +70,22 @@ public class InteractionReplicate : MonoBehaviour
             {
                 Debug.Log("Opening Doors Serverside");
                 SciFiDoubleDoor.SetBool("DoorOpen", true);
+            }
+        }
+    }
+
+
+    [PunRPC]
+    void RPC_CloseSciFiDoubleDoors(string DoubleDoorName_)
+    {
+        if (GameObject.Find(DoubleDoorName_))
+        {
+            SciFiDoubleDoor = GameObject.Find(DoubleDoorName_).GetComponent<Animator>();
+
+            if (SciFiDoubleDoor != null)
+            {
+                Debug.Log("Closing Doors Serverside");
+                SciFiDoubleDoor.SetBool("DoorOpen", false);
             }
         }
     }
