@@ -688,6 +688,7 @@ public class InteractionSystemManager : MonoBehaviour
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("KeyCard picked up");
+                       
                     }
 
                     else
@@ -697,6 +698,7 @@ public class InteractionSystemManager : MonoBehaviour
                         Destroy(tempPopup);
                         showingPopup = false;
                         Debug.Log("KeyCard picked up");
+                        SoundHandler.Instance.PlayPickUpCard();
                     }
                 }
             }
