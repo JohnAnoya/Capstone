@@ -8,6 +8,7 @@ public class InteractionReplicate : MonoBehaviour
 {
     static PhotonView photonView;
 
+    private Animator SciFiDoubleDoor;
     private Animator[] DoubleDoor = new Animator[2];
     private Animator SingleDoor; 
     private TextMeshProUGUI AnswerScreenText; 
@@ -17,6 +18,14 @@ public class InteractionReplicate : MonoBehaviour
         photonView = transform.GetComponent<PhotonView>();
     }
 
+
+    public static void OpenSciFiDoubleDoors(string doubleDoorName_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_OpenSciFiDoubleDoors", RpcTarget.All, doubleDoorName_);
+        }
+    }
 
     public static void OpenDoubleDoors(string leftDoorName_, string rightDoorName_)
     {
@@ -42,6 +51,20 @@ public class InteractionReplicate : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    void RPC_OpenSciFiDoubleDoors(string DoubleDoorName_)
+    {
+        if (GameObject.Find(DoubleDoorName_))
+        {
+            SciFiDoubleDoor = GameObject.Find(DoubleDoorName_).GetComponent<Animator>(); 
+
+            if(SciFiDoubleDoor != null)
+            {
+                Debug.Log("Opening Doors Serverside");
+                SciFiDoubleDoor.SetBool("DoorOpen", true);
+            }
+        }
+    }
 
     [PunRPC]
     void RPC_OpenDoubleDoors(string leftDoorName_, string rightDoorName_)

@@ -35,6 +35,18 @@ TagManager:
   - SingleDoor
   - AnswerScreen
   - KeyCard
+  - KeyCardScanner1
+  - KeyCardScanner2
+  - KeyCardScanner3
+  - SciFiDoubleDoor1
+  - SciFiDoubleDoor2
+  - SciFiDoubleDoor3
+  - SciFiDoubleDoor4
+  - KeyCardUpgrader1
+  - KeyCardUpgrader2
+  - KeyCardUpgrader3
+  - KeyCardScanner4
+  - DraggableCube
   layers:
   - Default
   - TransparentFX
@@ -46,7 +58,7 @@ TagManager:
   - 
   - Text
   - PostProcessing
-  - 
+  - LaserWall
   - 
   - 
   - 

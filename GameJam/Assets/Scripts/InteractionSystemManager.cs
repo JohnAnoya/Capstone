@@ -44,6 +44,13 @@ public class InteractionSystemManager : MonoBehaviour
     Image NoteImage; 
     bool showingNote = false;
 
+
+    bool isDraggingCube = false;
+    private string CurrentCubeDragging = "";
+
+    [SerializeField] private Animator[] SciFiDoubleDoor = new Animator[4];
+    private bool[] SciFiDoubleDoorisOpen = new bool[4];
+
     [SerializeField] private Animator[] DoubleDoor = new Animator[2];
     [SerializeField] private Animator SingleDoorPrison = null;
     [SerializeField] private Animator ExitDoor = null;
@@ -63,7 +70,8 @@ public class InteractionSystemManager : MonoBehaviour
         AddToInteractableList("FireplaceSwitch", "PrisonSwitch", "Note", "Note2", "Note3", "Note4", "Note5",
            "DoubleDoorTrigger1", "DoubleDoorTrigger2", "DoubleDoorTrigger3", "Brew", "BookButton",
            "1KeyPad", "2KeyPad", "3KeyPad", "4KeyPad", "5KeyPad", "6KeyPad", "7KeyPad", "8KeyPad", 
-           "9KeyPad", "Enter", "Reset");
+           "9KeyPad", "Enter", "Reset", "KeyCardScanner1", "KeyCardScanner2", "KeyCardScanner3", "KeyCardScanner4",
+           "KeyCardUpgrader1", "KeyCardUpgrader2", "KeyCardUpgrader3", "DraggableCube");
 
         SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes    
     }
@@ -697,6 +705,234 @@ public class InteractionSystemManager : MonoBehaviour
                     }
                 }
             }
+
+            else if (hit.transform.tag == "KeyCardScanner1" && Inventory.KeyCardUpgradeCount < 2 && !SciFiDoubleDoorisOpen[0])
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+
+                    if (Inventory.CheckInventory("KeyCard"))
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("Scan Key Card");
+                    }
+
+                    else
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("You Need a Key Card");
+                    }
+                }
+
+                if (Interactables.Contains("KeyCardScanner1") && Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[0].gameObject.name);
+                        SciFiDoubleDoorisOpen[0] = true;
+                    }
+
+                    else
+                    {
+                        Debug.Log("Trying to Open the Door!");
+                        SciFiDoubleDoor[0].SetBool("DoorOpen", true);
+                        SciFiDoubleDoorisOpen[0] = true;
+                    }
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCardScanner2" && Inventory.KeyCardUpgradeCount < 3 && !SciFiDoubleDoorisOpen[1])
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+
+                    if (Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 2)
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("Scan Key Card");
+                    }
+
+                    else
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("You Need a Level 2 Key Card");
+                    }
+                }
+
+                if (Interactables.Contains("KeyCardScanner2") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 2 && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[1].gameObject.name);
+                        SciFiDoubleDoorisOpen[1] = true;
+                    }
+
+                    else
+                    {
+                        Debug.Log("Trying to Open the Door!");
+                        SciFiDoubleDoor[1].SetBool("DoorOpen", true);
+                        SciFiDoubleDoorisOpen[1] = true;
+                    }
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCardScanner3" && Inventory.KeyCardUpgradeCount < 4 && !SciFiDoubleDoorisOpen[2])
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+
+                    if (Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 3)
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("Scan Key Card");
+                    }
+
+                    else
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("You Need a Level 3 Key Card");
+                    }
+                }
+
+                if (Interactables.Contains("KeyCardScanner3") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 3 && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[2].gameObject.name);
+                        SciFiDoubleDoorisOpen[2] = true;
+                    }
+
+                    else
+                    {
+                        Debug.Log("Trying to Open the Door!");
+                        SciFiDoubleDoor[2].SetBool("DoorOpen", true);
+                        SciFiDoubleDoorisOpen[2] = true;
+                    }
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCardScanner4" && Inventory.KeyCardUpgradeCount < 5 && !SciFiDoubleDoorisOpen[3])
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+
+                    if (Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 4)
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("Scan Key Card");
+                    }
+
+                    else
+                    {
+                        tempPopup.GetComponentInChildren<TMP_Text>().SetText("You Need a Level 4 Key Card");
+                    }
+                }
+
+                if (Interactables.Contains("KeyCardScanner4") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 4 && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        InteractionReplicate.OpenSciFiDoubleDoors(SciFiDoubleDoor[3].gameObject.name);
+                        SciFiDoubleDoorisOpen[3] = true;
+                    }
+
+                    else
+                    {
+                        Debug.Log("Trying to Open the Door!");
+                        SciFiDoubleDoor[3].SetBool("DoorOpen", true);
+                        SciFiDoubleDoorisOpen[3] = true;
+                    }
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCardUpgrader1" && Inventory.KeyCardUpgradeCount < 2)
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Upgrade Key Card");
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+                }
+
+                if (Interactables.Contains("KeyCardUpgrader1") && Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false; 
+                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                }     
+            }
+
+            else if (hit.transform.tag == "KeyCardUpgrader2" && Inventory.KeyCardUpgradeCount < 3)
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y + 2.0f, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Upgrade Key Card");
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+                }
+
+                if (Interactables.Contains("KeyCardUpgrader2") && Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                }
+            }
+
+            else if (hit.transform.tag == "KeyCardUpgrader3" && Inventory.KeyCardUpgradeCount < 4)
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Upgrade Key Card");
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+                }
+
+                if (Interactables.Contains("KeyCardUpgrader3") && Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                }
+            }
+
+            else if (hit.transform.tag == "DraggableCube" && !isDraggingCube)
+            {
+                if (!showingPopup)
+                {
+                    showingPopup = true;
+                    tempPopup = Instantiate(InteractionPopUp, new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z), Quaternion.identity);
+                    tempPopup.GetComponentInChildren<TMP_Text>().SetText("Pick Up Cube");
+                    tempPopup.GetComponentInChildren<TMP_Text>().fontSize = 20;
+                }
+
+                if (Interactables.Contains("DraggableCube") && Input.GetMouseButtonDown(0))
+                {
+                    Destroy(tempPopup);
+                    showingPopup = false;
+                    isDraggingCube = true;
+                    CurrentCubeDragging = hit.transform.name;
+                }
+            }
         }
 
 
@@ -714,6 +950,19 @@ public class InteractionSystemManager : MonoBehaviour
             }
 
             showingNote = false;
+        }
+
+        else if (isDraggingCube && Input.GetMouseButtonDown(0))
+        {
+            isDraggingCube = false;
+            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = true;
+        }
+
+        else if (isDraggingCube)
+        {
+            Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
+            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = false;
+            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().MovePosition(new Vector3(resultingPosition.x, resultingPosition.y, resultingPosition.z));           
         }
     }
 
@@ -757,6 +1006,26 @@ public class InteractionSystemManager : MonoBehaviour
             fireplaceEmitter = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<ParticleSystem>();
             fireParticleView = fireplaceEmitter.GetComponent<PhotonView>(); 
             firePlaceSounds = GameObject.FindGameObjectWithTag("FireParticles").GetComponent<AudioSource>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("SciFiDoubleDoor1"))
+        {
+            SciFiDoubleDoor[0] = GameObject.FindGameObjectWithTag("SciFiDoubleDoor1").GetComponent<Animator>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("SciFiDoubleDoor2"))
+        {
+            SciFiDoubleDoor[1] = GameObject.FindGameObjectWithTag("SciFiDoubleDoor2").GetComponent<Animator>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("SciFiDoubleDoor3"))
+        {
+            SciFiDoubleDoor[2] = GameObject.FindGameObjectWithTag("SciFiDoubleDoor3").GetComponent<Animator>();
+        }
+
+        if (GameObject.FindGameObjectWithTag("SciFiDoubleDoor4"))
+        {
+            SciFiDoubleDoor[3] = GameObject.FindGameObjectWithTag("SciFiDoubleDoor4").GetComponent<Animator>();
         }
 
         if (GameObject.FindGameObjectWithTag("LeftDoubleDoor") && GameObject.FindGameObjectWithTag("RightDoubleDoor"))

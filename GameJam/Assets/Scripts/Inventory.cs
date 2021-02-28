@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     static public int PotionCount = 0;
 
     //Sci-Fi Room 
-    static public int KeyCardUpgradeCount = 0; 
+    static public int KeyCardUpgradeCount = 1; 
 
     private void Awake()
     {

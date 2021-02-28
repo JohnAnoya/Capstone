@@ -12735,6 +12735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionSystemManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3137653844700899770, guid: 072f25785416354439b406f8d71d1761,
+        type: 3}
+      propertyPath: SciFiDoubleDoor.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3137653844700899771, guid: 072f25785416354439b406f8d71d1761,
         type: 3}
       propertyPath: m_LocalPosition.x
