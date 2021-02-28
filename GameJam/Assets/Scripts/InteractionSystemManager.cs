@@ -910,6 +910,7 @@ public class InteractionSystemManager : MonoBehaviour
                     showingPopup = false; 
                     Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
                     Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                    SoundHandler.Instance.PlayCardUpgrade();
                 }     
             }
 
@@ -929,6 +930,7 @@ public class InteractionSystemManager : MonoBehaviour
                     showingPopup = false;
                     Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
                     Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                    SoundHandler.Instance.PlayCardUpgrade();
                 }
             }
 
@@ -948,6 +950,7 @@ public class InteractionSystemManager : MonoBehaviour
                     showingPopup = false;
                     Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
                     Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                    SoundHandler.Instance.PlayCardUpgrade();
                 }
             }
 

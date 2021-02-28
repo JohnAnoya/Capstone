@@ -11,7 +11,8 @@ public class SoundHandler : MonoBehaviour
     AudioSource accessDenied;
 
     AudioSource pickUpCard;
-    
+    AudioSource cardUpgrade;
+
     //Singleton Setup
     private static SoundHandler instance_;
 
@@ -37,6 +38,7 @@ public class SoundHandler : MonoBehaviour
         accessDenied = sfxSounds[0];
         accessGranted = sfxSounds[1];
         pickUpCard = sfxSounds[2];
+        cardUpgrade = sfxSounds[3];
     }
 
     public void PlayAccessGranted() 
@@ -51,5 +53,9 @@ public class SoundHandler : MonoBehaviour
     public void PlayPickUpCard() 
     {
         pickUpCard.Play();
+    }
+    public void PlayCardUpgrade() 
+    {
+        cardUpgrade.Play();
     }
 }
