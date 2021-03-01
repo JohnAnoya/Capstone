@@ -1,31 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class TeleportToTeleporter : MonoBehaviour
 {
     [SerializeField]
     private GameObject OtherTeleporter;
+
+    PhotonView photonView;
+
+    private void Awake()
+    {
+        photonView = transform.GetComponent<PhotonView>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Found Player!");
-            if (other.gameObject.GetComponent<CharacterController>())
+
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+            {
+                if (photonView.IsMine)
+                {
+                    other.gameObject.GetComponent<CharacterController>().enabled = false;
+                    other.gameObject.transform.position = OtherTeleporter.transform.position;
+                    StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
+                }
+            }
+
+            else
             {
                 other.gameObject.GetComponent<CharacterController>().enabled = false;
                 other.gameObject.transform.position = OtherTeleporter.transform.position;
-                StartCoroutine(ReEnableCharacterController(other.gameObject.name));
+                StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
             }
         }
     }
 
 
-    IEnumerator ReEnableCharacterController(string playerName_)
+    IEnumerator ReEnableCharacterController(string playerTag_)
     {
         yield return new WaitForSeconds(0.025f);
-        GameObject.Find(playerName_).GetComponent<CharacterController>().enabled = true;
+        if (photonView.IsMine)
+        {
+            GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
+        }
     }
 }
