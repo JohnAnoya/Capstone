@@ -16,23 +16,15 @@ public class TeleportToSecretRoom : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag.Equals("Player") && other.gameObject.GetComponent<CharacterController>())
+        if (other.gameObject.tag.Equals("Player"))
         {
-            other.gameObject.GetComponent<CharacterController>().enabled = false;
-            other.gameObject.transform.position = Entrance.transform.position;
-            StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
+            if (other.gameObject.GetComponent<CharacterController>() != null)
+            {
+                var cc = other.gameObject.GetComponent<CharacterController>();
+                cc.enabled = false;
+                other.gameObject.transform.position = Entrance.transform.position;
+                cc.enabled = true;
+            }
         }    
     }
-
-
-  IEnumerator ReEnableCharacterController(string playerTag_)
-  {
-        yield return new WaitForSeconds(0.025f);
-
-        if (GameObject.FindGameObjectWithTag(playerTag_).gameObject.GetComponent<CharacterController>())
-        {
-            GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
-        }
-  }
 }
