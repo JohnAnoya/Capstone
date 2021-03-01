@@ -13,16 +13,19 @@ public class TeleportToTeleporter : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             Debug.Log("Found Player!");
-            other.gameObject.GetComponent<CharacterController>().enabled = false;
-            other.gameObject.transform.position = OtherTeleporter.transform.position;
-            StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
+            if (other.gameObject.GetComponent<CharacterController>())
+            {
+                other.gameObject.GetComponent<CharacterController>().enabled = false;
+                other.gameObject.transform.position = OtherTeleporter.transform.position;
+                StartCoroutine(ReEnableCharacterController(other.gameObject.name));
+            }
         }
     }
 
 
-    IEnumerator ReEnableCharacterController(string playerTag_)
+    IEnumerator ReEnableCharacterController(string playerName_)
     {
         yield return new WaitForSeconds(0.025f);
-        GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
+        GameObject.Find(playerName_).GetComponent<CharacterController>().enabled = true;
     }
 }

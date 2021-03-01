@@ -15,14 +15,14 @@ public class TeleportToSecretRoom : MonoBehaviour
             Debug.Log("Found Player!");
             other.gameObject.GetComponent<CharacterController>().enabled = false; 
             other.gameObject.transform.position = Entrance.transform.position;
-            StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
+            StartCoroutine(ReEnableCharacterController(other.gameObject.name));
         }    
     }
 
 
-  IEnumerator ReEnableCharacterController(string playerTag_)
+  IEnumerator ReEnableCharacterController(string playerName_)
   {
         yield return new WaitForSeconds(0.025f);
-        GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
+        GameObject.Find(playerName_).GetComponent<CharacterController>().enabled = true;
   }
 }
