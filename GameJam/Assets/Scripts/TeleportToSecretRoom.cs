@@ -21,7 +21,7 @@ public class TeleportToSecretRoom : MonoBehaviour
         {
             if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
             {
-                if (photonView.IsMine)
+                if (!photonView.IsMine)
                 {
                     other.gameObject.GetComponent<CharacterController>().enabled = false;
                     other.gameObject.transform.position = Entrance.transform.position;
@@ -42,7 +42,15 @@ public class TeleportToSecretRoom : MonoBehaviour
   IEnumerator ReEnableCharacterController(string playerTag_)
   {
         yield return new WaitForSeconds(0.025f);
-        if (photonView.IsMine)
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            if (!photonView.IsMine)
+            {
+                GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
+            }
+        }
+
+        else
         {
             GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
         }
