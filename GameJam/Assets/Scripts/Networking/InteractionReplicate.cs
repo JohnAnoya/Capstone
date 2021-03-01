@@ -18,6 +18,13 @@ public class InteractionReplicate : MonoBehaviour
         photonView = transform.GetComponent<PhotonView>();
     }
 
+    public static void ReplicateCubeDragging(string cubeName_)
+    {
+        if(photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_ReplicateCubeDragging", RpcTarget.All, cubeName_);
+        }
+    }
 
     public static void OpenSciFiDoubleDoors(string doubleDoorName_)
     {
@@ -56,6 +63,20 @@ public class InteractionReplicate : MonoBehaviour
         if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             photonView.RPC("RPC_UpdateAnswerScreen", RpcTarget.All, keyPressed_);
+        }
+    }
+
+    [PunRPC]
+    void RPC_ReplicateCubeDragging(string cubeName_)
+    {
+        if (GameObject.Find(cubeName_))
+        {
+            var cube = GameObject.Find(cubeName_).transform.GetChild(0).GetComponent<CubeProperties>();
+
+            if (cube != null)
+            {
+                cube.isDraggingCube = true; 
+            }
         }
     }
 

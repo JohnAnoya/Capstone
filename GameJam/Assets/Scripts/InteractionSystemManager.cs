@@ -968,8 +968,17 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     Destroy(tempPopup);
                     showingPopup = false;
-                    hit.transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = true;
-                    CurrentCubeDragging = hit.transform.name;
+
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom) {
+                        InteractionReplicate.ReplicateCubeDragging(hit.transform.name);
+                        CurrentCubeDragging = hit.transform.name;
+                    }
+
+                    else
+                    {
+                        hit.transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = true;
+                        CurrentCubeDragging = hit.transform.name;
+                    }
                 }
             }
         }
