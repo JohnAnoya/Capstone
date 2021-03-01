@@ -71,7 +71,7 @@ public class InteractionSystemManager : MonoBehaviour
         SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes    
     }
 
-    void Update()
+    void LateUpdate()
     {
        if (player && Camera.main != null)
        {
@@ -970,7 +970,7 @@ public class InteractionSystemManager : MonoBehaviour
                     showingPopup = false;
 
                     if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom) {
-                        InteractionReplicate.ReplicateCubeDragging(hit.transform.name);
+                        InteractionReplicate.ReplicateCubeDraggingBool(hit.transform.name, true);
                         CurrentCubeDragging = hit.transform.name;
                     }
 
@@ -1002,16 +1002,33 @@ public class InteractionSystemManager : MonoBehaviour
 
         else if (CurrentCubeDragging.Length > 0 && GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube && Input.GetMouseButtonDown(0))
         {
-            GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = false;
-            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = true;
-            CurrentCubeDragging = "";
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+            {
+                InteractionReplicate.ReplicateCubeDraggingBool(CurrentCubeDragging, false);
+                CurrentCubeDragging = "";
+            }
+
+            else
+            {
+                GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = false;
+                GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = true;
+                CurrentCubeDragging = "";
+            }
         }
 
         else if (CurrentCubeDragging.Length > 0 && GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube)
         {
             Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
-            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = false;
-            GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().MovePosition(new Vector3(resultingPosition.x, resultingPosition.y, resultingPosition.z));           
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+            {
+                InteractionReplicate.ReplicateCubeDragging(CurrentCubeDragging, resultingPosition);
+            }
+
+            else
+            {
+                GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = false;
+                GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().MovePosition(new Vector3(resultingPosition.x, resultingPosition.y, resultingPosition.z));
+            }
         }
     }
 

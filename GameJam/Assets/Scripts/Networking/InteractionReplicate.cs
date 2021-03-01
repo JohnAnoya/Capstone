@@ -18,15 +18,23 @@ public class InteractionReplicate : MonoBehaviour
         photonView = transform.GetComponent<PhotonView>();
     }
 
-    public static void ReplicateCubeDragging(string cubeName_)
+    public static void ReplicateCubeDraggingBool(string cubeName_, bool isDragging_)
     {
         if(photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            photonView.RPC("RPC_ReplicateCubeDragging", RpcTarget.All, cubeName_);
+            photonView.RPC("RPC_ReplicateCubeDraggingBool", RpcTarget.All, cubeName_, isDragging_);
         }
     }
 
-    public static void OpenSciFiDoubleDoors(string doubleDoorName_)
+    public static void ReplicateCubeDragging(string cubeName_, Vector3 newPos_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_ReplicateCubeDragging", RpcTarget.AllViaServer, cubeName_, newPos_);
+        }
+    }
+
+            public static void OpenSciFiDoubleDoors(string doubleDoorName_)
     {
         if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
@@ -67,16 +75,36 @@ public class InteractionReplicate : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_ReplicateCubeDragging(string cubeName_)
+    void RPC_ReplicateCubeDraggingBool(string cubeName_, bool isDragging_)
     {
         if (GameObject.Find(cubeName_))
         {
-            var cube = GameObject.Find(cubeName_).transform.GetChild(0).GetComponent<CubeProperties>();
+            var cube = GameObject.Find(cubeName_).transform;
 
             if (cube != null)
             {
-                cube.isDraggingCube = true; 
+                if (isDragging_)
+                {
+                    cube.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = true;
+                    cube.GetComponent<Rigidbody>().useGravity = false;
+                }
+
+                else
+                {
+                    cube.GetChild(0).GetComponent<CubeProperties>().isDraggingCube = false;
+                    cube.GetComponent<Rigidbody>().useGravity = true; 
+                }
+              
             }
+        }
+    }
+
+    [PunRPC]
+    void RPC_ReplicateCubeDragging(string cubeName_, Vector3 newPos_)
+    {
+        if (GameObject.Find(cubeName_))
+        {
+            GameObject.Find(cubeName_).GetComponent<Rigidbody>().MovePosition(new Vector3(newPos_.x, newPos_.y, newPos_.z));
         }
     }
 
