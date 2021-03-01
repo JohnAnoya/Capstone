@@ -17,25 +17,11 @@ public class TeleportToTeleporter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player") && other.gameObject.GetComponent<CharacterController>())
         {
-
-            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
-            {
-                if (photonView.IsMine)
-                {
-                    other.gameObject.GetComponent<CharacterController>().enabled = false;
-                    other.gameObject.transform.position = OtherTeleporter.transform.position;
-                    StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
-                }
-            }
-
-            else
-            {
-                other.gameObject.GetComponent<CharacterController>().enabled = false;
-                other.gameObject.transform.position = OtherTeleporter.transform.position;
-                StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
-            }
+            other.gameObject.GetComponent<CharacterController>().enabled = false;
+            other.gameObject.transform.position = OtherTeleporter.transform.position;
+            StartCoroutine(ReEnableCharacterController(other.gameObject.tag));
         }
     }
 
@@ -43,7 +29,7 @@ public class TeleportToTeleporter : MonoBehaviour
     IEnumerator ReEnableCharacterController(string playerTag_)
     {
         yield return new WaitForSeconds(0.025f);
-        if (photonView.IsMine)
+        if (GameObject.FindGameObjectWithTag(playerTag_).gameObject.GetComponent<CharacterController>())
         {
             GameObject.FindGameObjectWithTag(playerTag_).GetComponent<CharacterController>().enabled = true;
         }
