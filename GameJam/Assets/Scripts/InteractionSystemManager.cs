@@ -907,10 +907,20 @@ public class InteractionSystemManager : MonoBehaviour
                 if (Interactables.Contains("KeyCardUpgrader1") && Inventory.CheckInventory("KeyCard") && Input.GetMouseButtonDown(0))
                 {
                     Destroy(tempPopup);
-                    showingPopup = false; 
-                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
-                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
-                    SoundHandler.Instance.PlayCardUpgrade();
+                    showingPopup = false;
+
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        Inventory.IncrementValue("KeyCardUpgrade", 1);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
+
+                    else
+                    {
+                        Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                        Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
                 }     
             }
 
@@ -928,9 +938,19 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     Destroy(tempPopup);
                     showingPopup = false;
-                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
-                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
-                    SoundHandler.Instance.PlayCardUpgrade();
+
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        Inventory.IncrementValue("KeyCardUpgrade", 1);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
+
+                    else
+                    {
+                        Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                        Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
                 }
             }
 
@@ -948,9 +968,19 @@ public class InteractionSystemManager : MonoBehaviour
                 {
                     Destroy(tempPopup);
                     showingPopup = false;
-                    Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
-                    Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
-                    SoundHandler.Instance.PlayCardUpgrade();
+
+                    if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+                    {
+                        Inventory.IncrementValue("KeyCardUpgrade", 1);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
+
+                    else
+                    {
+                        Inventory.KeyCardUpgradeCount = Inventory.KeyCardUpgradeCount + 1;
+                        Debug.Log("Key Card upgraded to level " + Inventory.KeyCardUpgradeCount);
+                        SoundHandler.Instance.PlayCardUpgrade();
+                    }
                 }
             }
 

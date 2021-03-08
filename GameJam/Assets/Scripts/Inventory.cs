@@ -40,6 +40,14 @@ public class Inventory : MonoBehaviour
         CurrentInventory.Remove(item_);
     }
 
+    public static void IncrementValue(string ValueName_, int customIncrement_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_IncrementValue", RpcTarget.All, ValueName_, customIncrement_);   
+        }
+    }
+
     public static void AddToInventory(string item_, bool removeItemFromScene_, string gameObjectName_)
     {
         Debug.Log(removeItemFromScene_);
@@ -57,6 +65,11 @@ public class Inventory : MonoBehaviour
                 if (gameObjectName_.Contains("Potion"))
                 {
                     PotionCount += 1;
+                }
+
+                else if (gameObjectName_.Contains("KeyCard"))
+                {
+
                 }
 
                 CurrentInventory.Add(item_);
@@ -77,6 +90,15 @@ public class Inventory : MonoBehaviour
         {
             hasItem = false; 
             return hasItem; 
+        }
+    }
+
+    [PunRPC]
+    void RPC_IncrementValue(string ValueName_, int customIncrement_)
+    {
+        if(ValueName_.Equals("KeyCardUpgrade"))
+        {
+            KeyCardUpgradeCount += customIncrement_;
         }
     }
 
