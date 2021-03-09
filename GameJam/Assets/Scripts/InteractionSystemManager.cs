@@ -71,7 +71,7 @@ public class InteractionSystemManager : MonoBehaviour
         SceneManager.activeSceneChanged += ChangedActiveScene; //Call the ChangedActiveScene Method whenever the scene changes    
     }
 
-    void LateUpdate()
+    void Update()
     {
        if (player && Camera.main != null)
        {
@@ -1013,7 +1013,6 @@ public class InteractionSystemManager : MonoBehaviour
             }
         }
 
-
         else if (showingPopup)
         {
             showingPopup = false;
@@ -1047,17 +1046,18 @@ public class InteractionSystemManager : MonoBehaviour
         }
 
         else if (CurrentCubeDragging.Length > 0 && GameObject.Find(CurrentCubeDragging).transform.GetChild(0).GetComponent<CubeProperties>().isDraggingCube)
-        {
-            Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
+        {      
             if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
             {
+                Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
                 InteractionReplicate.ReplicateCubeDragging(CurrentCubeDragging, resultingPosition);
             }
 
             else
             {
                 GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().useGravity = false;
-                GameObject.Find(CurrentCubeDragging).GetComponent<Rigidbody>().MovePosition(new Vector3(resultingPosition.x, resultingPosition.y, resultingPosition.z));
+                Vector3 resultingPosition = Camera.main.transform.position + Camera.main.transform.forward * 3.0f;
+                GameObject.Find(CurrentCubeDragging).transform.position = new Vector3(resultingPosition.x, resultingPosition.y, resultingPosition.z);              
             }
         }
     }

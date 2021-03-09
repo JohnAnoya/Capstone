@@ -30,7 +30,7 @@ public class InteractionReplicate : MonoBehaviour
     {
         if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            photonView.RPC("RPC_ReplicateCubeDragging", RpcTarget.AllViaServer, cubeName_, newPos_);
+            photonView.RPC("RPC_ReplicateCubeDragging", RpcTarget.All, cubeName_, newPos_);
         }
     }
 
@@ -104,7 +104,7 @@ public class InteractionReplicate : MonoBehaviour
     {
         if (GameObject.Find(cubeName_))
         {
-            GameObject.Find(cubeName_).GetComponent<Rigidbody>().MovePosition(new Vector3(newPos_.x, newPos_.y, newPos_.z));
+            GameObject.Find(cubeName_).transform.position = new Vector3(newPos_.x, newPos_.y, newPos_.z);
         }
     }
 
