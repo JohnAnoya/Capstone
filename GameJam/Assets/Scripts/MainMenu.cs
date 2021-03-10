@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (showNewBackgroundImage)
+        if (showNewBackgroundImage && SceneManager.GetActiveScene().buildIndex == 0)
         {
             showNewBackgroundImage = false;
             StartCoroutine(ChangeBackgroundImage());
