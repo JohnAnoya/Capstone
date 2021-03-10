@@ -1089,15 +1089,14 @@ public class InteractionSystemManager : MonoBehaviour
             SciFiDoubleDoorisOpen[0] = false;
             SciFiDoubleDoorisOpen[1] = false;
             SciFiDoubleDoorisOpen[2] = false;
-            SciFiDoubleDoorisOpen[3] = false; 
+            SciFiDoubleDoorisOpen[3] = false;
             StartCoroutine(SetInteractables());
         }
     }
 
     IEnumerator SetInteractables()
     {
-        yield return new WaitForSeconds(1.0f);
-
+        yield return new WaitForSeconds(0.5f);
         DoubleDoorisOpen = false; //Reset DoubleDoorisOpen boolean variable
 
         if (GameObject.FindGameObjectWithTag("Player"))
@@ -1155,6 +1154,7 @@ public class InteractionSystemManager : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("NoteImage"))
         {
+            Debug.Log("Setting Note Image");
             NoteImage = GameObject.FindGameObjectWithTag("NoteImage").GetComponent<Image>();
         }
     }

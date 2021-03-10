@@ -13,12 +13,38 @@ public class MainMenu : MonoBehaviour
 
     private bool showingInfo = false; 
     public TextMeshProUGUI SinglePlayerMapSelected;
-    public TextMeshProUGUI SinglePlayerMapSelectedInfo; 
-   
+    public TextMeshProUGUI SinglePlayerMapSelectedInfo;
+
+    [SerializeField]
+    private Sprite[] BackgroundImages = new Sprite[5];
+    private int ImageIndex = 0;
+    private bool showNewBackgroundImage = true; 
+
+    [SerializeField]
+    private GameObject MainMenuPanel;
+    [SerializeField]
+    private GameObject CreditsPanel;
+    [SerializeField]
+    private GameObject CreateRoomPanel;
+    [SerializeField]
+    private GameObject CurrentRoomPanel;
+    [SerializeField]
+    private GameObject MapPickPanel;
+
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void Update()
+    {
+        if (showNewBackgroundImage)
+        {
+            showNewBackgroundImage = false;
+            StartCoroutine(ChangeBackgroundImage());
+        }
     }
 
     public void SelectMapText(string mapSelection_)
@@ -83,5 +109,50 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         SinglePlayerMapSelectedInfo.text = "";
         showingInfo = false; 
+    }
+
+    IEnumerator ChangeBackgroundImage()
+    {
+
+        MainMenuPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        CreditsPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        CreateRoomPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        CurrentRoomPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        MapPickPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+
+        //FADE IN 
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        {
+            MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CurrentRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            MapPickPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+        if (ImageIndex < 4)
+        {
+            ImageIndex++;
+        }
+
+        else
+        {
+            ImageIndex = 0;
+        }
+
+        yield return new WaitForSeconds(10.0f);
+        //FADE OUT
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
+        {
+            MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            CurrentRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            MapPickPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+        showNewBackgroundImage = true; 
     }
 }
