@@ -767,7 +767,7 @@ public class InteractionSystemManager : MonoBehaviour
                     }
                 }
 
-                if (Interactables.Contains("KeyCardScanner2") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount < 3 && Input.GetMouseButtonDown(0))
+                if (Interactables.Contains("KeyCardScanner2") && Inventory.CheckInventory("KeyCard") && Inventory.KeyCardUpgradeCount == 2 && Input.GetMouseButtonDown(0))
                 {
                     Destroy(tempPopup);
                     showingPopup = false;

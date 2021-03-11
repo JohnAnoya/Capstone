@@ -52,6 +52,10 @@ TagManager:
   - BlueCube
   - PlayerListings
   - NameTag
+  - UsernamePanel
+  - CreateRoomPanel
+  - UsernameText
+  - ErrorText
   layers:
   - Default
   - TransparentFX

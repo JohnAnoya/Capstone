@@ -25,18 +25,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject CreditsPanel;
     [SerializeField]
+    private GameObject UsernamePanel;
+    [SerializeField]
     private GameObject CreateRoomPanel;
     [SerializeField]
     private GameObject CurrentRoomPanel;
     [SerializeField]
     private GameObject MapPickPanel;
 
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
 
     private void Update()
     {
@@ -116,6 +112,7 @@ public class MainMenu : MonoBehaviour
 
         MainMenuPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         CreditsPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        UsernamePanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         CreateRoomPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         CurrentRoomPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         MapPickPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
@@ -125,6 +122,7 @@ public class MainMenu : MonoBehaviour
         {
             MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            UsernamePanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CurrentRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             MapPickPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
@@ -147,6 +145,7 @@ public class MainMenu : MonoBehaviour
         {
             MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            UsernamePanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CurrentRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             MapPickPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);

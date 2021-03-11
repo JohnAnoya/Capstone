@@ -17,14 +17,16 @@ public class NetworkingManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance_ != null && instance_ != this)
+        if (instance_ == null)
         {
-            Destroy(this.gameObject);
+            instance_ = this;
+            DontDestroyOnLoad(gameObject);
+           
         }
 
-        else
+        else if (instance_ != this)
         {
-
+            Destroy(instance_.gameObject);
             instance_ = this;
             DontDestroyOnLoad(gameObject);
         }
