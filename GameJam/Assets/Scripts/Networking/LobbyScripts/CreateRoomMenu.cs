@@ -97,22 +97,22 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 
     public void ShowCreateRoomPanel()
     {
-        GameObject.Find("RoomPanels").transform.Find("CreateRoomPanel").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("CreateRoomPanel").gameObject.SetActive(true);
     }
 
     public void HideCreateRoomPanel()
     {
-        GameObject.Find("RoomPanels").transform.Find("CreateRoomPanel").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("CreateRoomPanel").gameObject.SetActive(false);
     }
 
     public void ShowCurrentRoomPanel()
     {
-        GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("CurrentRoomPanel").gameObject.SetActive(true);
     }
 
     public void HideCurrentRoomPanel()
     {
-        GameObject.Find("RoomPanels").transform.Find("CurrentRoomPanel").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("CurrentRoomPanel").gameObject.SetActive(false);
     }
 
     IEnumerator ClearSinglePlayerMapInfo()
