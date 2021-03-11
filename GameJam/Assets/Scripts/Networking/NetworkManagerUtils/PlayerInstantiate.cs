@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerInstantiate : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class PlayerInstantiate : MonoBehaviour
     private GameObject player_;
 
     [SerializeField]
-    private Camera camera_; 
+    private Camera camera_;
+
+    [SerializeField]
+    private GameObject playerUserTag;
 
     private void Awake()
     {
@@ -36,6 +40,10 @@ public class PlayerInstantiate : MonoBehaviour
         Vector2 offset = Random.insideUnitCircle * 3.0f;
         Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
         var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
+        var plrNameTag = NetworkingManager.InstantiateOverNetwork(playerUserTag, plr.transform.position, Quaternion.identity);
+        plrNameTag.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.LocalPlayer.NickName;
+        plrNameTag.transform.parent = plr.transform;
+
         var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
         newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
         newCamera.transform.parent = plr.transform;     
