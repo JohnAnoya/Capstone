@@ -51,6 +51,7 @@ TagManager:
   - RedCube
   - BlueCube
   - PlayerListings
+  - NameTag
   layers:
   - Default
   - TransparentFX

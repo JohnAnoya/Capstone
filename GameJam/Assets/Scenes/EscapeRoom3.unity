@@ -906,6 +906,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_: {fileID: 3061643358926509580, guid: 6ec5a258fa3ec0341be8bca8dcfb5b18, type: 3}
   camera_: {fileID: 962627250747546173, guid: 1b87a9d02dd0a7f44a5789ebae791a94, type: 3}
+  playerUserTag: {fileID: 6745126408740872337, guid: 1dea465dd93c9e248af3bb1708b919e7,
+    type: 3}
 --- !u!4 &175158021
 Transform:
   m_ObjectHideFlags: 0

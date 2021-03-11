@@ -40,12 +40,12 @@ public class PlayerInstantiate : MonoBehaviour
         Vector2 offset = Random.insideUnitCircle * 3.0f;
         Vector3 position = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
         var plr = NetworkingManager.InstantiateOverNetwork(player_, position, Quaternion.identity);
-        var plrNameTag = NetworkingManager.InstantiateOverNetwork(playerUserTag, plr.transform.position, Quaternion.identity);
-        plrNameTag.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.LocalPlayer.NickName;
-        plrNameTag.transform.parent = plr.transform;
+
+        var plrNameTag = plr.transform.GetChild(1).GetChild(0).GetChild(0);
+        InteractionReplicate.ChangeUserTagText(plrNameTag.name, PhotonNetwork.LocalPlayer.NickName + "NameTag", PhotonNetwork.LocalPlayer.NickName);
 
         var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
         newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
-        newCamera.transform.parent = plr.transform;     
+        newCamera.transform.parent = plr.transform;
     }
 }

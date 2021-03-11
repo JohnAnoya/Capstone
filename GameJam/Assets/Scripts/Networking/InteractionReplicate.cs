@@ -74,6 +74,14 @@ public class InteractionReplicate : MonoBehaviour
         }
     }
 
+    public static void ChangeUserTagText(string tagName_, string newTagName_, string plrName_)
+    {
+        if (photonView && PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            photonView.RPC("RPC_ChangeUserTagText", RpcTarget.All, tagName_, newTagName_, PhotonNetwork.LocalPlayer.NickName);
+        }
+    }
+
     [PunRPC]
     void RPC_ReplicateCubeDraggingBool(string cubeName_, bool isDragging_)
     {
@@ -192,5 +200,15 @@ public class InteractionReplicate : MonoBehaviour
         }
 
         AnswerScreenText.text = AnswerScreenText.text + keyPressed_;
+    }
+
+    [PunRPC]
+    void RPC_ChangeUserTagText(string tagName_, string newTagName_, string plrName_)
+    {
+        if (GameObject.Find(tagName_))
+        {
+            GameObject.Find(tagName_).name = newTagName_;
+            GameObject.Find(newTagName_).GetComponent<TextMeshProUGUI>().text = plrName_;
+        }
     }
 }
