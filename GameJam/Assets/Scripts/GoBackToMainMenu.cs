@@ -11,7 +11,18 @@ public class GoBackToMainMenu : MonoBehaviour
     {
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
-            PhotonNetwork.Disconnect(); 
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();     
+        }
+
+        if (GameObject.Find("NetworkingManager"))
+        {
+            Destroy(GameObject.Find("NetworkingManager"));
+        }
+
+        if (GameObject.Find("InteractionSystemManager"))
+        {
+            Destroy(GameObject.Find("InteractionSystemManager"));
         }
 
         StartCoroutine(BackToMainMenuScene());

@@ -1080,7 +1080,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
-        if (next.name.Contains("EscapeRoom")) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
+        if (next.name.Contains("EscapeRoom") && this != null) //When the Scene changes make sure its an EscapeRoom Scene, and assign interactables during runtime
         {
             AddToItemList("Key", "Potion", "KeyCard");
             Inventory.RemoveFromInventory("Key");

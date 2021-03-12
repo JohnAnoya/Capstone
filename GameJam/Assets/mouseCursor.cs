@@ -9,6 +9,7 @@ public class mouseCursor : MonoBehaviour
     void Update()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None; 
         var cursorPos = Input.mousePosition;
         cursorPos.z = 10.0f;
         cursorPos = Camera.main.ScreenToWorldPoint(cursorPos);

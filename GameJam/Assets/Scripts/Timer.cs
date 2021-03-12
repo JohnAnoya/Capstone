@@ -24,12 +24,6 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-       
-        
-           
-        
-
         timeDisplay.text = Minutes.ToString() + "." + Seconds.ToString();
         if (Seconds <= 0)
         {
