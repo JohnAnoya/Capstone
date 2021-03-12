@@ -7,8 +7,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    static public float Seconds = 10;
-    static public float Minutes = 0;
+    static public float Seconds = 0;
+    static public float Minutes = 10;
     public TMP_Text timeDisplay;
 
     // Start is called before the first frame update
@@ -17,8 +17,7 @@ public class Timer : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 6)
         {
 
-            Minutes = 0;
-            Seconds = 10; 
+            Minutes = 10;
         }
     }
 
