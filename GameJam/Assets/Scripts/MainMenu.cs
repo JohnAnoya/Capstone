@@ -18,7 +18,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private Sprite[] BackgroundImages = new Sprite[5];
     private int ImageIndex = 0;
-    private bool showNewBackgroundImage = true; 
+    private bool showNewBackgroundImage = true;
+
+
+    private float TweenScaleDelay = 1.0f;
+    private Vector3 TweenScaleSize;
 
     [SerializeField]
     private GameObject MainMenuPanel;
@@ -35,7 +39,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject MapPickPanel;
 
-
+   
     private void Update()
     {
         if (showNewBackgroundImage && SceneManager.GetActiveScene().buildIndex == 0)
@@ -89,6 +93,20 @@ public class MainMenu : MonoBehaviour
         }
 
         StartCoroutine(LoadMainMenu());
+    }
+
+    public void SetTweenScaleSize(float newSize_)
+    {
+        TweenScaleSize = new Vector3(newSize_, newSize_, newSize_);
+    }
+
+    public void SetTweenScaleDelay(float newDelay_) {
+        TweenScaleDelay = newDelay_;
+    }
+
+    public void TweenSize(GameObject object_)
+    {
+        LeanTween.scale(object_, TweenScaleSize, TweenScaleDelay);
     }
 
     public void Exit ()
