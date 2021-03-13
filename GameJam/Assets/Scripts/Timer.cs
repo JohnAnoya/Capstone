@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
         {
 
             Minutes = 10;
+            Seconds = 0; 
         }
     }
 
