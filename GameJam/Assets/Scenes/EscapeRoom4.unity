@@ -23637,6 +23637,12 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ec93df37430b8744eafb13421c3e9050, type: 3}
+    - target: {fileID: 5203463034136588719, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 972580e2aa53bf94cb1a61c7bcf5ac72,
+        type: 2}
     - target: {fileID: 6985831179552075113, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
         type: 3}
       propertyPath: m_LocalPosition.x

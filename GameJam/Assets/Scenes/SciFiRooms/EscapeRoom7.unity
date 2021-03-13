@@ -37858,6 +37858,12 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 1716322354943898060, guid: 69a8328d43cd60649bbba7d1c3e1a8c7,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 972580e2aa53bf94cb1a61c7bcf5ac72,
+        type: 2}
     - target: {fileID: 3882162558817007535, guid: 69a8328d43cd60649bbba7d1c3e1a8c7,
         type: 3}
       propertyPath: m_Name

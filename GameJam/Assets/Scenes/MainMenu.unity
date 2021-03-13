@@ -337,13 +337,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 587228181}
   m_HandleRect: {fileID: 1969210384}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1252389734}
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &98946044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,8 +1616,8 @@ RectTransform:
   m_Father: {fileID: 442541742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2073,13 +2084,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 1688541351}
   m_HandleRect: {fileID: 278746614}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1252389734}
+        m_MethodName: SetSfxVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &544224093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,7 +2522,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2683,10 +2705,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1857183118155671300, guid: af270751534b3a8408b842270ea4746a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2991177548315053156, guid: af270751534b3a8408b842270ea4746a,
         type: 3}
       propertyPath: m_Name
       value: FPS_Diaplay_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991177548315053156, guid: af270751534b3a8408b842270ea4746a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3925895020965148946, guid: af270751534b3a8408b842270ea4746a,
         type: 3}
@@ -3136,6 +3168,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662997264}
   m_CullTransparentMesh: 0
+--- !u!223 &663316273 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1857183118155671300, guid: af270751534b3a8408b842270ea4746a,
+    type: 3}
+  m_PrefabInstance: {fileID: 620578226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674801101
 GameObject:
   m_ObjectHideFlags: 0
@@ -8531,11 +8569,23 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5203463034136588719, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 972580e2aa53bf94cb1a61c7bcf5ac72,
+        type: 2}
     - target: {fileID: 6698631435714746590, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
         type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6698631435714746590, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: f6506f36e2daceb48b9b63c7fd497dfb,
+        type: 2}
     - target: {fileID: 6985831179552075113, guid: 96ff3dc2f2381f04e8d0b18f2fb63676,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10009,8 +10059,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1252389734}
+        m_MethodName: FpsDisplayCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &1174426564
 GameObject:
   m_ObjectHideFlags: 0
@@ -10641,6 +10702,7 @@ GameObject:
   - component: {fileID: 1252389731}
   - component: {fileID: 1252389733}
   - component: {fileID: 1252389732}
+  - component: {fileID: 1252389734}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -10709,6 +10771,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252389730}
   m_CullTransparentMesh: 0
+--- !u!114 &1252389734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252389730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ad5bf991d456841b3e2a20b611483e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixer: {fileID: 24100000, guid: 972580e2aa53bf94cb1a61c7bcf5ac72, type: 2}
+  sfxMixer: {fileID: 24100000, guid: f6506f36e2daceb48b9b63c7fd497dfb, type: 2}
+  fpsCanvas: {fileID: 663316273}
+  fpsCountActive: 1
 --- !u!1 &1274874295
 GameObject:
   m_ObjectHideFlags: 0
@@ -11451,11 +11529,23 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5258176605562514642, guid: 5be59c2908b043741a7381cd3d3d8314,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: f6506f36e2daceb48b9b63c7fd497dfb,
+        type: 2}
     - target: {fileID: 9041632586006606480, guid: 5be59c2908b043741a7381cd3d3d8314,
         type: 3}
       propertyPath: m_Volume
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 9041632586006606480, guid: 5be59c2908b043741a7381cd3d3d8314,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: f6506f36e2daceb48b9b63c7fd497dfb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5be59c2908b043741a7381cd3d3d8314, type: 3}
 --- !u!1 &1547468967 stripped
@@ -11473,7 +11563,8 @@ AudioSource:
   m_GameObject: {fileID: 1547468967}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f6506f36e2daceb48b9b63c7fd497dfb,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ae718bcdd11d95546936325d0c9bfad5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
@@ -11569,7 +11660,8 @@ AudioSource:
   m_GameObject: {fileID: 1547468967}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f6506f36e2daceb48b9b63c7fd497dfb,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0f1806c7d8b1377478d6f8fb8130df58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -12175,7 +12267,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13453,8 +13545,8 @@ RectTransform:
   m_Father: {fileID: 674801102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
