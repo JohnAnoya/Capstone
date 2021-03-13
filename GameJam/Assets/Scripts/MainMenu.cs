@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject MainMenuPanel;
     [SerializeField]
+    private GameObject SettingsPanel;
+    [SerializeField]
     private GameObject CreditsPanel;
     [SerializeField]
     private GameObject UsernamePanel;
@@ -111,6 +113,7 @@ public class MainMenu : MonoBehaviour
     {
 
         MainMenuPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
+        SettingsPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         CreditsPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         UsernamePanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
         CreateRoomPanel.GetComponent<Image>().sprite = BackgroundImages[ImageIndex];
@@ -121,6 +124,7 @@ public class MainMenu : MonoBehaviour
         for (float i = 0; i <= 1; i += Time.deltaTime)
         {
             MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            SettingsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             UsernamePanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
@@ -144,6 +148,7 @@ public class MainMenu : MonoBehaviour
         for (float i = 1; i >= 0; i -= Time.deltaTime)
         {
             MainMenuPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            SettingsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreditsPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             UsernamePanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
             CreateRoomPanel.GetComponent<Image>().color = new Color(1, 1, 1, i);
