@@ -27,7 +27,7 @@ public class PlayerInstantiate : MonoBehaviour
             Debug.Log("Creating local player");
             var plr = Instantiate(player_, transform.position, Quaternion.identity);
             var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
-            newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
+            newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.75f, plr.transform.position.z + 0.8f);
             newCamera.transform.parent = plr.transform;
         }
     }
@@ -45,7 +45,7 @@ public class PlayerInstantiate : MonoBehaviour
         InteractionReplicate.ChangeUserTagText(plrNameTag.name, PhotonNetwork.LocalPlayer.NickName + "NameTag", PhotonNetwork.LocalPlayer.NickName);
 
         var newCamera = Instantiate(camera_, transform.position, Quaternion.identity);
-        newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.85f, plr.transform.position.z + 0.45f);
+        newCamera.transform.position = new Vector3(plr.transform.position.x, plr.transform.position.y + 0.75f, plr.transform.position.z + 0.8f);
         newCamera.transform.parent = plr.transform;
     }
 }
