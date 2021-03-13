@@ -65,11 +65,8 @@ public class Inventory : MonoBehaviour
                 if (gameObjectName_.Contains("Potion"))
                 {
                     PotionCount += 1;
-                }
-
-                else if (gameObjectName_.Contains("KeyCard"))
-                {
-
+                    CurrentInventory.Add("Potion" + PotionCount);
+                    return; 
                 }
 
                 CurrentInventory.Add(item_);

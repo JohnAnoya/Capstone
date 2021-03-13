@@ -2715,7 +2715,7 @@ PrefabInstance:
     - target: {fileID: 7516147023265018176, guid: 9122802f90381f84d8b8a93daaf9717a,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 7516147023265246560, guid: 9122802f90381f84d8b8a93daaf9717a,
         type: 3}
