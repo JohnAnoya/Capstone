@@ -19,13 +19,28 @@ public class SettingsMenu : MonoBehaviour
         settingsManager = GetComponent<SettingsManager>();
     }
 
-    private void Start()
+	private void Start()
 	{
-		float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
-		musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20); //Source Used: https://forum.unity.com/threads/changing-audio-mixer-group-volume-with-ui-slider.297884/
+		if (!PlayerPrefs.HasKey("MusicVolumePref"))
+		{
 
-        float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
-		sfxMixer.SetFloat("SfxVolume", Mathf.Log(savedSfxVol) * 20);
+			musicMixer.SetFloat("MusicVolume", 1);
+		}
+
+		else if (!PlayerPrefs.HasKey("SfxVolumePref"))
+		{
+			sfxMixer.SetFloat("SfxVolume", 1);
+
+		}
+
+		else
+		{
+			float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
+			musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20); //Source Used: https://forum.unity.com/threads/changing-audio-mixer-group-volume-with-ui-slider.297884/
+
+			float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
+			sfxMixer.SetFloat("SfxVolume", Mathf.Log(savedSfxVol) * 20);
+		}
 	}
 
 	public void SetMusicVolume(float volume_) 

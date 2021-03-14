@@ -23,8 +23,21 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         // Assigning player prefs on startup 
-        musicVolumeSlider.value = PlayerPrefs.GetFloat(MUSIC_VOLUME_PREF);
-        sfxVolumeSlider.value = PlayerPrefs.GetFloat(SFX_VOLUME_PREF);
+        if (!PlayerPrefs.HasKey("MusicVolumePref"))
+        {
+            musicVolumeSlider.value = 1;
+        }
+
+        else if (!PlayerPrefs.HasKey("SfxVolumePref"))
+        {
+            sfxVolumeSlider.value = 1;
+        }
+
+        else
+        {
+            musicVolumeSlider.value = PlayerPrefs.GetFloat(MUSIC_VOLUME_PREF);
+            sfxVolumeSlider.value = PlayerPrefs.GetFloat(SFX_VOLUME_PREF);
+        }
 
         enableFpsCounter.isOn = GetBoolPref(FPS_DISPLAY_PREF);
         enableFullscreen.isOn = GetBoolPref(ENABLE_FULLSCREEN_PREF);
