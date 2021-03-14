@@ -14,10 +14,13 @@ public class SettingsMenu : MonoBehaviour
 
 	SettingsManager settingsManager;
 
-	private void Start()
-	{
-		settingsManager = GetComponent<SettingsManager>();
+    private void Awake()
+    {
+        settingsManager = GetComponent<SettingsManager>();
+    }
 
+    private void Start()
+	{
 		float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
 		musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20); //Source Used: https://forum.unity.com/threads/changing-audio-mixer-group-volume-with-ui-slider.297884/
 
