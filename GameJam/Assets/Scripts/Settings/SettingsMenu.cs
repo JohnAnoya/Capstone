@@ -19,10 +19,10 @@ public class SettingsMenu : MonoBehaviour
 		settingsManager = GetComponent<SettingsManager>();
 
 		float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
-		musicMixer.SetFloat("MusicVolume", savedMusicVol);
+		musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20);
 
 		float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
-		sfxMixer.SetFloat("SfxVolume", savedSfxVol);
+		sfxMixer.SetFloat("SfxVolume", Mathf.Log(savedSfxVol) * 20);
 	}
 
 	public void SetMusicVolume(float volume_) 
@@ -31,7 +31,7 @@ public class SettingsMenu : MonoBehaviour
 		if (PlayerPrefs.HasKey("MusicVolumePref")) 
 		{
 			float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
-			musicMixer.SetFloat("MusicVolume", savedMusicVol);
+			musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20);
 		} 
 	}
 
@@ -41,7 +41,7 @@ public class SettingsMenu : MonoBehaviour
 		if (PlayerPrefs.HasKey("SfxVolumePref"))
 		{
 			float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
-			sfxMixer.SetFloat("SfxVolume", savedSfxVol);
+			sfxMixer.SetFloat("SfxVolume", Mathf.Log(savedSfxVol) * 20);
 		}
 	}
 
