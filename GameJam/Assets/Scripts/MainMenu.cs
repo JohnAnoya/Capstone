@@ -53,13 +53,13 @@ public class MainMenu : MonoBehaviour
     {
         if (mapSelection_.Contains("Room1"))
         {
-            SinglePlayerMapSelected.text = "MAP SELECTED: LOST & FOUND"; 
+            SinglePlayerMapSelected.text = "MAP SELECTED: Lost & Found"; 
     
         }
 
         else if (mapSelection_.Contains("Room6"))
         {
-            SinglePlayerMapSelected.text = "MAP SELECTED: SCI-FI MAP";
+            SinglePlayerMapSelected.text = "MAP SELECTED: Spatium Stella";
         }
 
         MapPickSelection = mapSelection_;
@@ -107,6 +107,17 @@ public class MainMenu : MonoBehaviour
     public void TweenSize(GameObject object_)
     {
         LeanTween.scale(object_, TweenScaleSize, TweenScaleDelay);
+    }
+
+
+    public void TweenShowLevelInfoPosition(GameObject object_)
+    {
+        LeanTween.move(object_.GetComponent<RectTransform>(), new Vector3(250.0f, 35.0f, 0.0f), 0.15f);
+    }
+
+    public void TweenHideLevelInfoPosition(GameObject object_)
+    {
+        LeanTween.move(object_.GetComponent<RectTransform>(), new Vector3(-300.0f, 35.0f, 0.0f), 0.15f);
     }
 
     public void Exit ()

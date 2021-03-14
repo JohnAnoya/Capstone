@@ -14,11 +14,17 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 6)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
 
             Minutes = 10;
             Seconds = 0; 
+        }
+
+        else if (SceneManager.GetActiveScene().buildIndex == 6)
+        {
+            Minutes = 8;
+            Seconds = 0;
         }
     }
 

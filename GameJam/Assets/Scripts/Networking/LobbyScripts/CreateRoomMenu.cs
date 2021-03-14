@@ -24,13 +24,13 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     {
         if (mapSelection_.Contains("Room1"))
         {
-            MultiPlayerMapSelected.text = "MAP SELECTED: LOST & FOUND";
+            MultiPlayerMapSelected.text = "MAP SELECTED: Lost & Found";
 
         }
 
         else if (mapSelection_.Contains("Room6"))
         {
-            MultiPlayerMapSelected.text = "MAP SELECTED: SCI-FI MAP";
+            MultiPlayerMapSelected.text = "MAP SELECTED: Spatium Stella";
         }
 
         MapPickSelection = mapSelection_;      
