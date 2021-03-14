@@ -1412,7 +1412,7 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 52393614}
   sfxVolumeSlider: {fileID: 526133766}
   enableFpsCounter: {fileID: 1093318772}
-  enableFullscreen: {fileID: 0}
+  enableFullscreen: {fileID: 1440185955}
 --- !u!114 &218520394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13229,7 +13229,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1466604677
 GameObject:
   m_ObjectHideFlags: 0
