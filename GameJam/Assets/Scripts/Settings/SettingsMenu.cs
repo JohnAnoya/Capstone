@@ -19,9 +19,9 @@ public class SettingsMenu : MonoBehaviour
 		settingsManager = GetComponent<SettingsManager>();
 
 		float savedMusicVol = PlayerPrefs.GetFloat("MusicVolumePref");
-		musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20);
+		musicMixer.SetFloat("MusicVolume", Mathf.Log(savedMusicVol) * 20); //Source Used: https://forum.unity.com/threads/changing-audio-mixer-group-volume-with-ui-slider.297884/
 
-		float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
+        float savedSfxVol = PlayerPrefs.GetFloat("SfxVolumePref");
 		sfxMixer.SetFloat("SfxVolume", Mathf.Log(savedSfxVol) * 20);
 	}
 
