@@ -97,7 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6840e07d0df05714f92b0d117ab03c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  clampInDegrees: {x: 360, y: 180}
+  lockCursor: 1
+  sensitivity: {x: 0.5, y: 0.5}
+  smoothing: {x: 3, y: 3}
+  targetDirection: {x: 0, y: 0}
+  targetCharacterDirection: {x: 0, y: 0}
+  characterBody: {fileID: 0}
 --- !u!114 &5808502550637450512
 MonoBehaviour:
   m_ObjectHideFlags: 0
