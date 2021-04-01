@@ -40,7 +40,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-
+            PhotonNetwork.CurrentRoom.IsVisible = false; 
             PhotonNetwork.LoadLevel(MapPickSelection);
         }
 
