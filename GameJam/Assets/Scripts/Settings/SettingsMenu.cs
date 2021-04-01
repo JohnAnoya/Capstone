@@ -79,7 +79,7 @@ public class SettingsMenu : MonoBehaviour
 	{
 		if (settingsManager.enableFullscreen.isOn == true)
 		{
-			Screen.fullScreen = Screen.fullScreen;
+			Screen.fullScreen = !Screen.fullScreen;
 		}
 		else if (settingsManager.enableFullscreen.isOn == false)
 		{
