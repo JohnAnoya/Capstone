@@ -4563,6 +4563,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2991177548315053156, guid: af270751534b3a8408b842270ea4746a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FpsCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 3925895020965148946, guid: af270751534b3a8408b842270ea4746a,
         type: 3}
       propertyPath: m_LocalPosition.x

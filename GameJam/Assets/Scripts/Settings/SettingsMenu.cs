@@ -21,6 +21,8 @@ public class SettingsMenu : MonoBehaviour
 
 	private void Start()
 	{
+		fpsCanvas = GameObject.FindGameObjectWithTag("FpsCanvas").GetComponent<Canvas>();
+
 		if (!PlayerPrefs.HasKey("MusicVolumePref"))
 		{
 
