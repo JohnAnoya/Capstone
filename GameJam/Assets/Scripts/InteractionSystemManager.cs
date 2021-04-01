@@ -1085,7 +1085,10 @@ public class InteractionSystemManager : MonoBehaviour
             AddToItemList("Key", "Potion", "KeyCard");
             Inventory.RemoveFromInventory("Key");
             Inventory.RemoveFromInventory("KeyCard");
-            Inventory.RemoveFromInventory("Potion");
+            Inventory.RemoveFromInventory("Potion1");
+            Inventory.RemoveFromInventory("Potion2");
+            Inventory.RemoveFromInventory("Potion3");
+            Inventory.PotionCount = 0; 
             SciFiDoubleDoorisOpen[0] = false;
             SciFiDoubleDoorisOpen[1] = false;
             SciFiDoubleDoorisOpen[2] = false;
