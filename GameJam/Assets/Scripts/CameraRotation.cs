@@ -20,13 +20,6 @@ public class CameraRotation : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-        //Ensure the cursor is locked if set
-        if (lockCursor)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        Cursor.visible = true;
-
         // Set target direction to the camera's initial orientation.
         targetDirection = transform.localRotation.eulerAngles;
 
@@ -42,6 +35,13 @@ public class CameraRotation : MonoBehaviourPun
 
     void LateUpdate()
     {
+        //Ensure the cursor is locked if set
+        if (lockCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Cursor.visible = false;
+
         if (characterBody)
         {
             if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && base.photonView.IsMine)
